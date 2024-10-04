@@ -12,9 +12,11 @@
             align-items: center;
             text-align: center;
             font-family: Arial, sans-serif;
+            color: #333;
         }
         .content {
             width: 50%;
+            max-width: 800px;
         }
         .image-container {
             margin-bottom: 30px;
@@ -24,6 +26,9 @@
             transition: transform 0.3s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            width: 100%;
+            height: auto;
+            display: block;
         }
         .zoom-overlay {
             display: none;
@@ -45,9 +50,34 @@
             cursor: pointer;
         }
         .caption {
-            margin-top: 10px;
+            margin-top: 15px;
             font-weight: bold;
             color: #333;
+            font-size: 1.2em;
+        }
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                width: 95%;
+                padding: 0 5px;
+                box-sizing: border-box;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .caption {
+                font-size: 1.1em;
+            }
+            p {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
@@ -56,28 +86,25 @@
     <div class="content">
         <h2>Contoh input VPN Client Mikhmon Online di Winbox</h2>
         
-        <p>Pilih salah satu VPN Client yang akan digunakan L2TP atau SSTP.</p>
-        <p>Catatan: Hanya bisa menggunakan salah satu VPN Client saja.</p>
-        
+        <p>Pilih salah satu VPN Client yang akan digunakan: L2TP atau SSTP.</p>
+        <p><strong>Catatan:</strong> Hanya bisa menggunakan salah satu VPN Client saja.</p>
+        <hr></hr>
         <div class="image-container">
             <div class="caption">Profile VPN</div>
             <p>Buat Profile VPN dengan Name: vpn-mikhmon</p>
-            <img class="zoomable" style="width: 100%; height: auto; display: block;"
-                alt="SSTP Client Winbox" src="https://laksa19.github.io/profile-vpn-mikhmononline.jpg">
+            <img class="zoomable" alt="SSTP Client Winbox" src="https://laksa19.github.io/profile-vpn-mikhmononline.jpg">
         </div>
         
         <div class="image-container">
             <div class="caption">L2TP Client</div>
-            <p>Sesuaikan Connect to, User dan Password serta Profile dengan akun Anda.</p>
-            <img class="zoomable" style="width: 100%; height: auto; display: block;"
-                alt="L2TP Client Winbox" src="https://laksa19.github.io/l2tp-mikhmononline.jpg">
+            <p>Sesuaikan Connect to, User, Password, dan Profile dengan akun Anda.</p>
+            <img class="zoomable" alt="L2TP Client Winbox" src="https://laksa19.github.io/l2tp-mikhmononline.jpg">
         </div>
         
         <div class="image-container">
             <div class="caption">SSTP Client</div>
-            <p>Sesuaikan Connect to, User dan Password serta Profile dengan akun Anda.</p>
-            <img class="zoomable" style="width: 100%; height: auto; display: block;"
-                alt="SSTP Client Winbox" src="https://laksa19.github.io/sstp-mikhmononline.jpg">
+            <p>Sesuaikan Connect to, User, Password, dan Profile dengan akun Anda.</p>
+            <img class="zoomable" alt="SSTP Client Winbox" src="https://laksa19.github.io/sstp-mikhmononline.jpg">
         </div>
     </div>
 

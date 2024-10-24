@@ -189,7 +189,7 @@
   <body>
     <div class="main_page">
       <div class="page_header floating_element">
-        <img src="/icons/openlogo-75.png" alt="Debian Logo" class="floating_element"/>
+        
         <span class="floating_element">
           Apache2 Debian Default Page
         </span>

@@ -1,43 +1,11 @@
 <html>
 <head>
-		<title>WiFi</title>
-		<meta charset="utf-8">
-		<meta http-equiv="cache-control" content="private" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!-- Tell the browser to be responsive to screen width -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- Theme color -->
-		<meta name="theme-color" content="<?= $themecolor ?>" />
-		<!-- Font Awesome -->
-		<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css" />
-		<!-- Mikhmon UI -->
-		<link rel="stylesheet" href="css/mikhmon-ui.<?= $theme; ?>.min.css">
-		<!-- jQuery -->
-		<script src="js/jquery.min.js"></script>
-		<!-- pace -->
-		<link href="css/pace.<?= $theme; ?>.css" rel="stylesheet" />
-		<script src="js/pace.min.js"></script>
-</head>
+
 
     <frameset rows="100%,*">
         <frame src="http://connect.indoserver.de:86/312.html" frameborder="0"  seamless="seamless">
     </frameset>
-<script>
-var message="silakan klik menu yang tersedia";
-///////////////////////////////////
-function clickIE4(){if (event.button==2)
-{alert(message);return false;}}
-function clickNS4(e){if (document.layers||
-document.getElementById&&!
-document.all){if (e.which==2||e.which==3)
-{alert(message);return false;}}}
-if (document.layers)
-{document.captureEvents
-(Event.MOUSEDOWN);document.onmousedown=clickNS4;}
-else if (document.all&&!
-document.getElementById)
-{document.onmousedown=clickIE4;}
-document.oncontextmenu=new Function
-("alert(message);return false")
-</script>
+
+
+</head>
 </body></html>

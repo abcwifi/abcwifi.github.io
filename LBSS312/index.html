@@ -17,13 +17,7 @@
 
 
 <body class='login'>
-$(if chap-id)
-	<form name="sendin" action="$(link-login-only)" method="post">
-		<input type="hidden" name="username" />
-		<input type="hidden" name="password" />
-		<input type="hidden" name="dst" value="$(link-orig)" />
-		<input type="hidden" name="popup" value="true" />
-	</form>
+
 	
 	<script type="text/javascript" src="/md5.js"></script>
 	<script type="text/javascript">
@@ -53,7 +47,7 @@ $(if chap-id)
                
                 <button class="button" type="submit"><i class="icon icon-login">&#xe803;</i> Terhubung</button></br> 
 <font face="Arial, Helvetica, Sans Serif" size="4" color="#FFFFFF"><b>	Server Status : online
-<p> The download will begin in <span id="countdowntimer">10 </span> Seconds</p>
+<p><span id="countdowntimer">10 </span> Seconds</p>
 
 <script type="text/javascript">
     var timeleft = 10;

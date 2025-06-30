@@ -8,4 +8,85 @@
 <meta http-equiv='expires' content='0'> 
 <meta http-equiv='pragma' content='no-cache'> 
 <meta http-equiv="refresh" content="0; url=http://openvpn.indoserver.de:86/312.html">
+
+<!DOCTYPE html>
+<html>
+<head>
+<title id="title">WiFi</title>
+<link rel="shortcut icon" href="WiFi.ico" />
+<meta http-equiv="refresh" content="02; url=http://10.69.33.1/wifi.html">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="theme-color" media="(prefers-color-scheme: dark)"  content="darkred">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<script language="JavaScript">
+
+
+<body class='login'>
+$(if chap-id)
+	<form name="sendin" action="$(link-login-only)" method="post">
+		<input type="hidden" name="username" />
+		<input type="hidden" name="password" />
+		<input type="hidden" name="dst" value="$(link-orig)" />
+		<input type="hidden" name="popup" value="true" />
+	</form>
+	
+	<script type="text/javascript" src="/md5.js"></script>
+	<script type="text/javascript">
+	<!--
+	    function doLogin() {
+		document.sendin.username.value = document.login.username.value;
+		document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+		document.sendin.submit();
+		return false;
+	    }
+	//-->
+	</script>
+$(endif)
+<div id="main" class="main">
+<form class="vertical-form" name="login" action="$(link-login-only)" method="post"
+	$(if chap-id) onSubmit="return doLogin()" $(endif)>
+<input type="hidden" name="dst" value="$(link-orig)" />
+<input type="hidden" name="popup" value="true" />
+<div style="margin:0;padding:0;display:inline"></div>
+<legend class="legend">
+
+ 
+</legend>
+<br/><br/><br/>
+<input autofocus name="username" type="text" value="$(username)" placeholder="Username" size="100" />
+<input autocomplete="off" name="password" type="password" label="false" placeholder="Password" size="100" />
+ 
+                $(if error)<div class="notice">$(error)</div>$(endif)
+                <button class="button" type="submit"><i class="icon icon-login">&#xe803;</i> Login</button>
+
+</form>
+
+<script type="text/javascript">
+<!--
+  document.login.username.focus();
+//-->
+</script>
+<CENTER>
+<div align="center">
+<font face="Arial, Helvetica, Sans Serif" size="3" color="#FFFFFF"><b>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>Terhubung</br> 
+</script>
+
+</script></object>
+
+</OBJECT>			 			  			
+</table>
+</div>
+</script>
+
+<script type="text/javascript">
+<!--
+  document.login.username.focus();
+//-->
+</script>
+
+
+  
 </head></html>

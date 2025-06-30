@@ -53,15 +53,17 @@ $(if chap-id)
                
                 <button class="button" type="submit"><i class="icon icon-login">&#xe803;</i> Terhubung</button></br> 
 <font face="Arial, Helvetica, Sans Serif" size="4" color="#FFFFFF"><b>	Server Status : online
-var timeleft = 10;
-var downloadTimer = setInterval(function(){
-  if(timeleft <= 0){
-    clearInterval(downloadTimer);
-  }
-  document.getElementById("progressBar").value = 10 - timeleft;
-  timeleft -= 1;
-}, 1000);
-<progress value="0" max="10" id="progressBar"></progress>	
+<p> The download will begin in <span id="countdowntimer">10 </span> Seconds</p>
+
+<script type="text/javascript">
+    var timeleft = 10;
+    var downloadTimer = setInterval(function(){
+    timeleft--;
+    document.getElementById("countdowntimer").textContent = timeleft;
+    if(timeleft <= 0)
+        clearInterval(downloadTimer);
+    },1000);
+</script>	
 
 </form>
 

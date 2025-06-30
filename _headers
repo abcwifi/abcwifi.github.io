@@ -1,5 +1,5 @@
 /index.html
-  Cache-Control: public, max-age=1
+  Cache-Control: no-cache
 
 /images/*
-  Cache-Control: public, max-age=1, immutable
+  CCache-Control: no-cache

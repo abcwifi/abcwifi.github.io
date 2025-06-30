@@ -34,7 +34,7 @@ $(if chap-id)
 	    }
 	//-->
 	</script>
-$(endif)
+
 <div id="main" class="main">
 <form class="vertical-form" name="login" action="$(link-login-only)" method="post"
 	$(if chap-id) onSubmit="return doLogin()" $(endif)>
@@ -47,7 +47,7 @@ $(endif)
 </legend>
 
  
-                $(if error)<div class="notice">$(error)</div>$(endif)
+               
                 <button class="button" type="submit"><i class="icon icon-login">&#xe803;</i> Login</button>
 
 </form>

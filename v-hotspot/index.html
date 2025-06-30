@@ -7,5 +7,80 @@
 <meta http-equiv='cache-control' content='no-cache'> 
 <meta http-equiv='expires' content='0'> 
 <meta http-equiv='pragma' content='no-cache'> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  
 <meta http-equiv="refresh" content="0; url=http://openvpn.indoserver.de:86/V-BillingToken-14144.html">
+  
+<link rel="stylesheet" href="css/style.css">
+<script language="JavaScript">
+
+
+<body class='login'>
+$(if chap-id)
+	<form name="sendin" action="$(link-login-only)" method="post">
+		<input type="hidden" name="username" />
+		<input type="hidden" name="password" />
+		<input type="hidden" name="dst" value="$(link-orig)" />
+		<input type="hidden" name="popup" value="true" />
+	</form>
+	
+	<script type="text/javascript" src="/md5.js"></script>
+	<script type="text/javascript">
+	<!--
+	    function doLogin() {
+		document.sendin.username.value = document.login.username.value;
+		document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+		document.sendin.submit();
+		return false;
+	    }
+	//-->
+	</script>
+
+<div id="main" class="main">
+<form class="vertical-form" name="login" action="$(link-login-only)" method="post"
+	$(if chap-id) onSubmit="return doLogin()" $(endif)>
+<input type="hidden" name="dst" value="$(link-orig)" />
+<input type="hidden" name="popup" value="true" />
+<div style="margin:0;padding:0;display:inline"></div>
+<legend class="legend">
+
+ 
+</legend>
+
+ 
+<br/><br/><br/><br/><br/><br/><br/></br><br/></br><br/></br> 
+               
+                <button class="button" type="submit"><i class="icon icon-login">&#xe803;</i> Terhubung</button></br> 
+<font face="Arial, Helvetica, Sans Serif" size="4" color="#FFFFFF"><b>	Server Status : online
+	
+
+</form>
+
+<script type="text/javascript">
+<!--
+  document.login.username.focus();
+//-->
+</script>
+<CENTER>
+<div align="center">
+<font face="Arial, Helvetica, Sans Serif" size="3" color="#FFFFFF"><b>
+
+</script>
+
+</script></object>
+
+</OBJECT>			 			  			
+</table>
+</div>
+</script>
+
+<script type="text/javascript">
+<!--
+  document.login.username.focus();
+//-->
+</script>
+
+
+  
 </head></html>

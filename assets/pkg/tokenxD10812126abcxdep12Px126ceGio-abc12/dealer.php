@@ -76,7 +76,7 @@ if ($id == "login" || substr($url, -1) == "p") {
     if ($user == $useradm && $pass == decrypt($passadm)) {
       $_SESSION["mikhmon"] = $user;
 
-        echo "<script>window.location='./?session=abc11lbs'</script>";
+        echo "<script>window.location='./?session=abc12jktAa'</script>";
     
     } else {
       $error = '<div style="width: 100%; padding:5px 0px 5px 0px; border-radius:5px;" class="bg-danger"><i class="fa fa-ban"></i> Silakan cek lagi...<br>Kode Agen/Token tidak sesuai</div>';

@@ -22,96 +22,139 @@
 		
 	</head>
 	<body>
-		<div class="wrapper">
-
-			
-<span style="display:none;" id="idto">10</span>
+<center>
+<?php if ($id != "") { ?>
 
 
+<?php if (($id == "settings" && $session == "new") || $id == "settings" && $router == "new") {
+}else if ($id == "settings" || $id == "editor"|| $id == "uplogo" || $id == "connect"){
+?>  
 
 
+<?php 
+} ?>  
+  
 </div>
+<?php 
+include('./info.php');
+} else { ?>
+
+
+<a id="openNav" hidden="true" class="navbar-hover" href="javascript:void(0)"></a>
+<a id="closeNav" hidden="true" class="navbar-hover" href="javascript:void(0)"></a>
 <script>
 $(document).ready(function(){
   $(".connect").change(function(){
-    notify("Connecting");
+    notify("<?= $_connecting ?>");
     connect(this.value)
   });
   $(".stheme").change(function(){
-    notify("Loading theme");
+    notify("<?= $_loading_theme ?>");
     stheme(this.value)
   });
 });
 </script>
-<div id="notify"><div class="message"></div></div>
-<div id="temp"></div>
+<?php 
+include('./include/info.php');
+} ?>
 
 
-    <center>
-<span style="display:none;" id="idto">10</span>
-
-
-
-<div id="navbar" class="navbar">
-  <div class="navbar-left">
-<a id="openNav" class="navbar-hover" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
-<a id="closeNav" class="navbar-hover" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
+<div class="dropdown-btn text-center"> &nbsp;
+<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown-btn"> Agen-<?= $useradm; ?> Semua Paket </button>
 </div>
- <div class="navbar-right">
-  <a id="logout" href="./?hotspot=logout&session=didizabc11lbs" >Lokasi : 10.8.0.12:12010/abc-JKT&nbsp;Keluar&nbsp;<i class="fa fa-sign-out mr-1"></i></a>
-</div>
-</div>
-
-<div id="sidenav" class="sidenav">
-<div class="dropdown-btn ">
-<h3>&nbsp;<i class="fa fa-user-circle"></i> PAKET-AGEN-1<i class="fa fa-caret-down"></i>
-</div>
-</h3>
-<div class="dropdown-container ">
-
-  <!--active-->
-  <a href="./?session=didizabc11lbs" class="menu "><i class="fa fa-dashboard"></i> Akses Token</a>
-  <!-Voucher-->
-  <a href="./?report=selling&session=didizabc11lbs" class="menu "><i class="nav-icon fa fa-money"></i> Riwayat Voucher</a>
-  <!-Catatan-->
-  <a href="./?hotspot=template-editor&template=default&session=didizabc11lbs" class="menu "> <i class="fa fa-edit "></i> Catatan </a>
-</div>
-   <a class="btn bg-blue" href="./?hotspot=Agen-x-4-JAM&profile=Vc1x-4-JAM&session=didizabc11lbs"><i class="fa fa fa-wifi"></i><span style="font-size: 19px;"> Paket-4-JAM</span></a>
-   <a class="btn bg-blue" href="./?hotspot=Agen-x-6-JAM&profile=Vc1x-6-JAM&session=didizabc11lbs"><i class="fa fa fa-wifi"></i><span style="font-size: 19px;"> Paket-6-JAM</span></a>
-   <a class="btn bg-blue" href="./?hotspot=Agen-x-9-JAM&profile=Vc1x-9-JAM&session=didizabc11lbs"><i class="fa fa fa-wifi"></i><span style="font-size: 19px;"> Paket-9-JAM</span></a></br>
+<div class="dropdown-container <?= $lmenu; ?>">
+   <a class="btn bg-blue" href="./?hotspot=Agen-x-4-JAM&profile=Vc<?= $useradm; ?>x-4-JAM&session=<?= $session; ?>"><span style="font-size: 21px;">4-JAM</span></a>
+   <a class="btn bg-blue" href="./?hotspot=Agen-x-6-JAM&profile=Vc<?= $useradm; ?>x-6-JAM&session=<?= $session; ?>"><span style="font-size: 21px;">6-JAM</span></a>
+   <a class="btn bg-blue" href="./?hotspot=Agen-x-9-JAM&profile=Vc<?= $useradm; ?>x-9-JAM&session=<?= $session; ?>"><span style="font-size: 21px;">9-JAM</span></a></br>
 <div class=""><a style="text-decoration: underline; color:#000;" href="$(link-login-only)?dst=$(link-orig-esc)"></a></div>
-   <a class="btn bg-green" href="./?hotspot=Agen-x-1-HARI&profile=Vc1x-1-HARI&session=didizabc11lbs"><i class="fa fa fa-wifi"></i><span style="font-size: 19px;"> Paket-1-HARI</span></a>
-   <a class="btn bg-green" href="./?hotspot=Agen-x-2-HARI&profile=Vc1x-2-HARI&session=didizabc11lbs"><i class="fa fa fa-wifi"></i><span style="font-size: 19px;"> Paket-2-HARI</span></a>
-   <a class="btn bg-green" href="./?hotspot=Agen-x-3-HARI&profile=Vc1x-3-HARI&session=didizabc11lbs"><i class="fa fa fa-wifi"></i><span style="font-size: 19px;"> Paket-3-HARI</span></a></br>
+   <a class="btn bg-green" href="./?hotspot=Agen-x-1-HARI&profile=Vc<?= $useradm; ?>x-1-HARI&session=<?= $session; ?>"><span style="font-size: 20px;">1-HARI</span></a>
+   <a class="btn bg-green" href="./?hotspot=Agen-x-2-HARI&profile=Vc<?= $useradm; ?>x-2-HARI&session=<?= $session; ?>"><span style="font-size: 20px;">2-HARI</span></a>
+   <a class="btn bg-green" href="./?hotspot=Agen-x-3-HARI&profile=Vc<?= $useradm; ?>x-3-HARI&session=<?= $session; ?>"><span style="font-size: 20px;">3-HARI</span></a></br>
 <div class=""><a style="text-decoration: underline; color:#000;" href="$(link-login-only)?dst=$(link-orig-esc)"></a></div>
-   <a class="btn bg-red" href="./?hotspot=Agen-x-7-HARI&profile=Vc1x-7-HARI&session=didizabc11lbs"><i class="fa fa fa-wifi"></i><span style="font-size: 19px;"> Paket-7-HARI</span></a>
-   <a class="btn bg-red" href="./?hotspot=Agen-x-14-HARI&profile=Vc1x-14-HARI&session=didizabc11lbs"><i class="fa fa fa-wifi"></i><span style="font-size: 19px;"> Paket-14-HARI</span></a>
-   <a class="btn bg-red" href="./?hotspot=Agen-x-30-HARI&profile=Vc1x-30-HARI&session=didizabc11lbs"><i class="fa fa fa-wifi"></i><span style="font-size: 19px;"> Paket-30-HARI</span></a></br>
+   <a class="btn bg-red" href="./?hotspot=Agen-x-7-HARI&profile=Vc<?= $useradm; ?>x-7-HARI&session=<?= $session; ?>"><span style="font-size: 18px;">7-HARI</span></a>
+   <a class="btn bg-red" href="./?hotspot=Agen-x-14-HARI&profile=Vc<?= $useradm; ?>x-14-HARI&session=<?= $session; ?>"><span style="font-size: 17px;">14-HARI</span></a>
+   <a class="btn bg-red" href="./?hotspot=Agen-x-30-HARI&profile=Vc<?= $useradm; ?>x-30-HARI&session=<?= $session; ?>"><span style="font-size: 17px;">30-HARI</span></a></br>
+<div class=""><a style="text-decoration: underline; color:#000;" href="$(link-login-only)?dst=$(link-orig-esc)"></a></div>
+<div class=""><a style="text-decoration: underline; color:#000;" href="$(link-login-only)?dst=$(link-orig-esc)"></a></div>
+</div></div>
+&nbsp; Data Voucher
+<CENTER>
+<?php
+/*
+ *  Copyright (C) 2018 Laksamadi Guko.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-      <option id="MikhmonSession" hidden="true" value=""><hidden="true"></option>
-        </div>
-  </div>
+// hide all error
+error_reporting(0);
+ini_set('max_execution_time', 300);
 
+if (!isset($_SESSION["mikhmon"])) {
+  header("Location:../seller.php?id=login");
+} else {
 
-</div>
-<script>
-$(document).ready(function(){
-  $(".connect").change(function(){
-    notify("Connecting");
-    connect(this.value)
-  });
-  $(".stheme").change(function(){
-    notify("Loading theme");
-    stheme(this.value)
-  });
-});
-</script>
-<div id="notify"><div class="message"></div></div>
-<div id="temp"></div>
+  if ($prof == "") {
+    $getuser = $API->comm("/ip/hotspot/user/print");
+    $TotalReg = count($getuser);
 
-<div id="main">  
-<div id="loading" class="lds-dual-ring"></div>
-<div class="main-container" style="display:none"><center>
+    $counttuser = $API->comm("/ip/hotspot/user/print", array(
+      "count-only" => ""
+    ));
+
+  } elseif ($prof != "") {
+    $getuser = $API->comm("/ip/hotspot/user/print", array(
+      "?profile" => "$prof",
+    ));
+    $TotalReg = count($getuser);
+
+    $counttuser = $API->comm("/ip/hotspot/user/print", array(
+      "count-only" => "",
+      "?profile" => "$prof",
+    ));
+
+  }
+  if ($comm != "") {
+    $getuser = $API->comm("/ip/hotspot/user/print", array(
+      "?comment" => "$comm",
+    //"?uptime" => "00:00:00"
+    ));
+    $TotalReg = count($getuser);
+
+    $counttuser = $API->comm("/ip/hotspot/user/print", array(
+      "count-only" => "",
+      "?comment" => "$comm",
+    ));
+    
+  }
+  $exp = $_GET['exp'];
+  if ($exp != "") {
+    $getuser = $API->comm("/ip/hotspot/user/print", array(
+      "?limit-uptime" => "1s",
+    ));
+    
+    $counttuser = $API->comm("/ip/hotspot/user/print", array(
+      "count-only" => "",
+      "?limit-uptime" => "1s",
+    ));
+    
+  }
+  $getprofile = $API->comm("/ip/hotspot/user/profile/print");
+  $TotalReg2 = count($getprofile);
+}
+?>
+<center>
 <style>
         input[type="password"]::placeholder {
             
@@ -146,113 +189,190 @@ $(document).ready(function(){
         }
     </style>
 
+<meta http-equiv="refresh" content="58" >
+<div class="">
+      <select hidden="true" style="padding:0px;" class="card-header" onchange="location = this.value; loader()">
+  </div>
 
-
-<script>
-  function Pass(id){
-    var x = document.getElementById(id);
-    if (x.type === 'password') {
-    x.type = 'text';
+  <div class="">
+    <select style="padding:0px;" class="card-header" id="comment" name="comment" onchange="location = './?hotspot=users&comment='+ this.value +'&session=<?= $session;?>';">
+    <?php
+    if ($comm != "") {
     } else {
-    x.type = 'password';
-    }}
-</script>
+    }
+    $TotalReg = count($getuser);
+    for ($i = 0; $i < $TotalReg; $i++) {
+      $ucomment = $getuser[$i]['comment'];
+      $uprofile = $getuser[$i]['profile'];
+      $acomment .= ",".$ucomment." Paket : ". $uprofile;
+    }
 
-<script>
-  var _0x7470=["\x68\x6F\x73\x74\x6E\x61\x6D\x65","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x2E","\x73\x70\x6C\x69\x74","\x6D\x69\x6B\x68\x6D\x6F\x6E\x2E\x6F\x6E\x6C\x69\x6E\x65","\x78\x62\x61\x6E\x2E\x78\x79\x7A","\x6C\x6F\x67\x61\x6D\x2E\x69\x64","\x6D\x69\x6E\x69\x73\x2E\x69\x64","\x69\x6E\x64\x65\x78\x4F\x66","\x3C\x73\x70\x61\x6E\x20\x3E\x3C\x69\x20\x63\x6C\x61\x73\x73\x3D\x22\x74\x65\x78\x74\x2D\x77\x68\x69\x74\x65\x20\x66\x61\x20\x66\x61\x2D\x69\x6E\x66\x6F\x2D\x63\x69\x72\x63\x6C\x65\x22\x3E\x3C\x2F\x69\x3E\x20\x3C\x61\x20\x63\x6C\x61\x73\x73\x3D\x22\x74\x65\x78\x74\x2D\x62\x6C\x75\x65\x22\x20\x68\x72\x65\x66\x3D\x22\x2E\x2F\x61\x64\x6D\x69\x6E\x2E\x70\x68\x70\x3F\x69\x64\x3D\x61\x62\x6F\x75\x74\x22\x3E\x43\x68\x65\x63\x6B\x20\x55\x70\x64\x61\x74\x65\x3C\x2F\x61\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x68\x74\x6D\x6C","\x23\x6E\x65\x77\x56\x65\x72","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x72\x61\x77\x2E\x67\x69\x74\x68\x75\x62\x75\x73\x65\x72\x63\x6F\x6E\x74\x65\x6E\x74\x2E\x63\x6F\x6D\x2F\x6C\x61\x6B\x73\x61\x31\x39\x2F\x6D\x69\x6B\x68\x6D\x6F\x6E\x76\x33\x2F\x6D\x61\x73\x74\x65\x72\x2F\x76\x65\x72\x73\x6F\x6E\x2E\x74\x78\x74\x3F\x74\x3D","\x72\x61\x6E\x64\x6F\x6D","\x66\x6C\x6F\x6F\x72","\x76","\x76\x65\x72\x73\x69\x6F\x6E","","\x72\x65\x70\x6C\x61\x63\x65","\x69\x6E\x6E\x65\x72\x48\x54\x4D\x4C","\x6C\x6F\x61\x64\x56","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x20","\x75\x70\x64\x61\x74\x65\x64","\x2D","\x4E\x65\x77\x20\x56\x65\x72\x73\x69\x6F\x6E\x20","\x3C\x62\x72\x3E\x3C\x73\x70\x61\x6E\x20\x3E\x3C\x69\x20\x63\x6C\x61\x73\x73\x3D\x22\x74\x65\x78\x74\x2D\x77\x68\x69\x74\x65\x20\x66\x61\x20\x66\x61\x2D\x69\x6E\x66\x6F\x2D\x63\x69\x72\x63\x6C\x65\x22\x3E\x3C\x2F\x69\x3E\x20\x3C\x61\x20\x63\x6C\x61\x73\x73\x3D\x22\x74\x65\x78\x74\x2D\x62\x6C\x75\x65\x22\x20\x68\x72\x65\x66\x3D\x22\x2E\x2F\x61\x64\x6D\x69\x6E\x2E\x70\x68\x70\x3F\x69\x64\x3D\x61\x62\x6F\x75\x74\x22\x3E\x43\x68\x65\x63\x6B\x20\x55\x70\x64\x61\x74\x65\x3C\x2F\x61\x3E\x3C\x2F\x73\x70\x61\x6E\x3E","\x67\x65\x74\x4A\x53\x4F\x4E"];var hname=window[_0x7470[1]][_0x7470[0]];var dom=hname[_0x7470[3]](_0x7470[2])[1]+ _0x7470[2]+ hname[_0x7470[3]](_0x7470[2])[2];var domArray=[_0x7470[4],_0x7470[5],_0x7470[6],_0x7470[7]];var a=domArray[_0x7470[8]](hname);var b=domArray[_0x7470[8]](dom);if(dom== _0x7470[4]){$(_0x7470[11])[_0x7470[10]](_0x7470[9])}else {if(a> 0|| b> 0){}else {$[_0x7470[27]](_0x7470[12]+ (Math[_0x7470[14]]((Math[_0x7470[13]]()* 999999999)+ 1))* 128,function(_0xc1b4x6){getNewVer= (_0xc1b4x6[_0x7470[16]])[_0x7470[3]](_0x7470[15])[1];var _0xc1b4x7=parseInt(getNewVer[_0x7470[18]](_0x7470[2],_0x7470[17]));var _0xc1b4x8=document[_0x7470[21]](_0x7470[20])[_0x7470[19]];var _0xc1b4x9=(_0xc1b4x8[_0x7470[3]](_0x7470[22])[0])[_0x7470[3]](_0x7470[15])[1];var _0xc1b4xa=parseInt(_0xc1b4x9[_0x7470[18]](_0x7470[2],_0x7470[17]));var _0xc1b4xb=(_0xc1b4x7- _0xc1b4xa);getNewVer= (_0xc1b4x6[_0x7470[16]])[_0x7470[3]](_0x7470[15])[1];var _0xc1b4x7=parseInt(getNewVer[_0x7470[18]](_0x7470[2],_0x7470[17]));var _0xc1b4x8=document[_0x7470[21]](_0x7470[20])[_0x7470[19]];var _0xc1b4x9=(_0xc1b4x8[_0x7470[3]](_0x7470[22])[0])[_0x7470[3]](_0x7470[15])[1];var _0xc1b4xa=parseInt(_0xc1b4x9[_0x7470[18]](_0x7470[2],_0x7470[17]));var _0xc1b4xb=(_0xc1b4x7- _0xc1b4xa);getNewD= (_0xc1b4x6[_0x7470[23]])[_0x7470[3]](_0x7470[22])[0];newD= parseInt((getNewD)[_0x7470[3]](_0x7470[24])[2]+ (getNewD)[_0x7470[3]](_0x7470[24])[0]+ (getNewD)[_0x7470[3]](_0x7470[24])[1]);var _0xc1b4xc=parseInt((_0xc1b4x8[_0x7470[3]](_0x7470[22])[1])[_0x7470[3]](_0x7470[24])[2]+ (_0xc1b4x8[_0x7470[3]](_0x7470[22])[1])[_0x7470[3]](_0x7470[24])[0]+ (_0xc1b4x8[_0x7470[3]](_0x7470[22])[1][_0x7470[3]](_0x7470[24]))[1]);var _0xc1b4xd=(newD- _0xc1b4xc);if(_0xc1b4xb> 0|| _0xc1b4xd> 0){$(_0x7470[11])[_0x7470[10]](_0x7470[25]+ _0xc1b4x6[_0x7470[16]]+ _0x7470[22]+ _0xc1b4x6[_0x7470[23]]+ _0x7470[26])}})}}
-</script>
+    $ocomment=  explode(",",$acomment);
+    
+    $comments=array_count_values($ocomment) ;
+    foreach ($comments as $tcomment=>$value) {
 
+      if (is_numeric(substr($tcomment, 3, 3))) {
+       
+        echo "<option value='" . explode("#",$tcomment)[0] . "' >". explode("#",$tcomment)[0]." ".explode("#",$tcomment)[1]. " [".$value. "]</option>";
+       }
  
-   <center>
-   <a class="btn bg-blue" href="./?hotspot=Agen-x-4-JAM&profile=Vc1x-4-JAM&session=didizabc11lbs"><span style="font-size: 18px;">4-JAM</span></a>
-   <center>
-    <iframe src="./?hotspot=users&profile=Vc1x-4-JAM&session=didizabc11lbs"  width="100%" height="498" scrolling="yes" frameborder="0"  seamless="seamless"></iframe>  </div>
+    }
 
+    ?>
+<span id="timer1"> </span> | &nbsp;<i onclick="location.reload();" class="fa fa-refresh pointer " title="Reload data"></i>&nbsp;&nbsp;59 detik cek otomatis
+    </select>
+ <script type="text/javascript">
 
-<SCRIPT LANGUAGE="JavaScript">
+/* Count Down Script (c)2010 John Davenport Scheuer
+   as first seen in http://www.dynamicdrive.com/forums/
+   username: jscheuer1 - This Notice Must Remain for Legal Use
+   */
 
-<CENTER>
-<div align="center">
+function Timer(id, minLimit, callback){
+	var thisTimer = this;
+	this.limit = minLimit * 60;
+	this.callback = callback;
+	this.timer = 0;
+	this.addEvent(window, 'load', function(){
+		thisTimer.el = document.getElementById(id);
+		thisTimer.txt = thisTimer.el.firstChild;
+		thisTimer.intv = setInterval(function(){thisTimer.intvFunc();}, 1000);
+	});
+}
 
-</br>
+Timer.prototype = {
+
+	intvFunc: function(){
+		this.txt.nodeValue = this.formatTime(++this.timer);
+		if(this.timer === this.limit){
+			clearInterval(this.intv);
+			this.callback.call(this);
+		}
+	},
+
+	formatNum: function(n){
+		return n < 10?  n : n;
+	},
+
+	formatTime: function (n, m, s){
+		s = n % 60;
+		m = (n - s) / 60;
+		return ['', this.formatNum(s)].join('');
+	},
+
+	addEvent: (function(){return window.addEventListener? function(el, ev, f){
+			el.addEventListener(ev, f, false);
+		}:window.attachEvent? function(el, ev, f){
+			el.attachEvent('on' + ev, f);
+		}:function(){return;};
+	})()
+};
+
+// Usage: new Timer('id_of_counting_element', #_of_mins, callback_function(){});
+new Timer('timer1', 60, function(){this.el.parentNode.style.color = 'red'});
+new Timer('timer2', 15, function(){this.el.parentNode.style.color = 'green'});
+</script>
+</head>
+<body> 
+
+  </div>
+ 
+  <div class="col-6">
+  <script>
+    function printV(a,b){
+    var comm = document.getElementById('comment').value;
+    var url = "./voucher/print.php?id="+comm+"&"+a+"="+b+"&session=<?= $session; ?>";
+    if (comm === "" ){
+      <?php if ($currency == in_array($currency, $cekindo['indo'])) { ?>
+      alert('Silakan pilih salah satu Comment terlebih dulu!');
+      <?php
+    } else { ?>
+      alert('Please choose one of the Comments first!');
+      <?php
+    } ?>
+    }else{
+      var win = window.open(url, '_blank');
+      win.focus();
+    }}
+  </script>
+  </div>
 </div>
+<div class="btn bg-secondary" ><span style="font-size: 14px;"> Voucher Expired NOTA-QR terhapus otomatis</span></div>
+<div class="overflow mr-t-10 box-bordered" style="max-height: 70vh">
+<table id="" style="text-align:center;" class="table table-bordered table-hover text-nowrap">
+  <thead>
+  <tr></CENTER>
+    <th>STATUS</th>
+    <th>NOTA-QR</th>
+    <th>Voucher Expired </th>
+    </tr>
+  </thead>
 
-</script>
-<CENTER>
-<div align="center">
-</b><b><font face="Arial, Helvetica, Sans Serif" size="3" color="#FFFFFF">
-<span id="clock">
-Copyright : 
-</script>
-<SCRIPT LANGUAGE="JavaScript">
-<!-- Begin
-var dayaarray=new Array("openvpn.indoserver.de&#169;2005-")
-var dayarray=new Array("Minggu","Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu")
-var montharray=new Array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember")
-function getthedate(){
-var mydate=new Date()
-var year=mydate.getYear()
-if (year < 1000)
-year+=1900
-var day=mydate.getDay()
-var month=mydate.getMonth()
-var daym=mydate.getDate()
-if (daym<10)
-daym="0"+daym
-var hours=mydate.getHours()
-var minutes=mydate.getMinutes()
-var seconds=mydate.getSeconds()
-var dn=""
+  <tbody id="tbody">
 
-{
- d = new Date();
- Time24H = new Date();
- Time24H.setTime(d.getTime() + (d.getTimezoneOffset()*60000) + 3600000);
- InternetTime = Math.round((Time24H.getHours()*60+Time24H.getMinutes()) / 1.44);
- if (InternetTime < 10) InternetTime = '00'+InternetTime;
- else if (InternetTime < 100) InternetTime = '0'+InternetTime;
+<?php
+for ($i = 0; $i < $TotalReg; $i++) {
+  $userdetails = $getuser[$i];
+  $uid = $userdetails['.id'];
+  $userver = $userdetails['server'];
+  $uname = $userdetails['name'];
+  $upass = $userdetails['password'];
+  $uprofile = $userdetails['profile'];
+  $umacadd = $userdetails['mac-address'];
+  $uuptime = formatDTM($userdetails['uptime']);
+  $ubytesi = formatBytes($userdetails['bytes-in'], 2);
+  $ubyteso = formatBytes($userdetails['bytes-out'], 2);
+
+  $ucomment = $userdetails['comment'];
+  $udisabled = $userdetails['disabled'];
+  $utimelimit = $userdetails['limit-uptime'];
+  if ($utimelimit == '1s') {
+    $utimelimit = ' expired';
+  } else {
+    $utimelimit = ' ' . $utimelimit;
+  }
+  $udatalimit = $userdetails['limit-bytes-total'];
+  if ($udatalimit == '') {
+    $udatalimit = '';
+  } else {
+    $udatalimit = ' ' . formatBytes($udatalimit, 2);
+  }
+
+  echo "<tr>";
+  ?>
+  
+
+  <?php
+  if ($udisabled == "true") {} else {}
+  echo "<td>" . $userver . "</td>";
+
+  if ($uname == $upass) {
+    $usermode = "vc";
+  }
+  echo "<td><a title='" . $uid . "' href=./?hotspot-user=" . $uid . "&session=" . $session . ">Nota : " . $uid . " </a>";
+  
+  
+  echo "<td>";
+  if ($uname == "default-trial") {
+  } else if (substr($ucomment,0,3) == "vc-" || substr($ucomment,0,3) == "up-") {
+    echo "<href=./?hotspot=users&comment=" . $ucomment . "&session=" . $session . " title=''><i class='fa fa-search'></i> ". $ucomment." ". $udatalimit ." ".$utimelimit . "";
+  } else if ($utimelimit == ' expired') {
+    echo "<a></a>";
+  }else{
+    echo $ucomment.' ';
+  }
+  echo  "</td>";
+
+
 }
-if (hours<=9)
-hours="0"+hours
-if (minutes<=9)
-minutes="0"+minutes
-if (seconds<=9)
-seconds="0"+seconds
-//change font size here
-var cdate=dayaarray+""+year+" <br\> "+dayarray[day]+", "+daym+" "+montharray[month]+" "+year+" "+hours+":"+minutes+":"+seconds+" "+dn+""
+?>
+  </tr>
 
-if (document.all)
-document.all.clock.innerHTML=cdate
-else if (document.getElementById)
-document.getElementById("clock").innerHTML=cdate
-else
-document.write(cdate)
-}
-if (!document.all&&!document.getElementById)
-getthedate()
-function goforit(){
-if (document.all||document.getElementById)
-setInterval("getthedate()",1000)
-}
-window.onload=goforit
-//  End -->
-</script></object>
+  </tbody>
 
-</OBJECT>			 			  			
 </table>
-</div>
-</script>
 
-<script type="text/javascript">
-<!--
-  document.login.username.focus();
-//-->
-</script>
-
-
-</div>
-</div>
-</body>
 
 </div>
 </div>

@@ -1,0 +1,591 @@
+</CENTER>
+  <a id="logout" href="http://10.69.33.1" > Lokasi : <?= $identity; ?>&nbsp;&nbsp;-&nbsp;&nbsp;Keluar&nbsp;&nbsp;<i class="fa fa-sign-out mr-1"></i><?= $_logout ?></a>
+  
+
+</CENTER>
+<?php
+/*
+ *  Copyright (C) 2018 Laksamadi Guko.
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+session_start();
+// hide all error
+error_reporting(0);
+if (!isset($_SESSION["mikhmon"])) {
+	header("Location:../cek.php?id=login");
+} else {
+
+	$idhr = $_GET['idhr'];
+	$idbl = $_GET['idbl'];
+	$idbl2 = explode("/",$idhr)[0].explode("/",$idhr)[2];
+	if ($idhr != ""){
+		$_SESSION['report'] = "&idhr=".$idhr;
+	} elseif ($idbl != ""){
+		$_SESSION['report'] = "&idbl=".$idbl;
+	} else {
+		$_SESSION['report'] = "";
+	}
+	$_SESSION['idbl'] = $idbl;
+	$remdata = ($_POST['remdata']);
+	$prefix = $_GET['prefix'];
+	
+
+	$gettimezone = $API->comm("/system/clock/print");
+	$timezone = $gettimezone[0]['time-zone-name'];
+	date_default_timezone_set($timezone);
+
+	if (isset($remdata)) {
+		if (strlen($idhr) > "0") {
+			if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+				$API->write('/system/script/print', false);
+				$API->write('?source=' . $idhr . '', false);
+				$API->write('=.proplist=.id');
+				$ARREMD = $API->read();
+				for ($i = 0; $i < count($ARREMD); $i++) {
+					$API->write('/system/script/remove', false);
+					$API->write('=.id=' . $ARREMD[$i]['.id']);
+					$READ = $API->read();
+
+				}
+			}
+		} elseif (strlen($idbl) > "0") {
+			if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+				$API->write('/system/script/print', false);
+				$API->write('?owner=' . $idbl . '', false);
+				$API->write('=.proplist=.id');
+				$ARREMD = $API->read();
+				for ($i = 0; $i < count($ARREMD); $i++) {
+					$API->write('/system/script/remove', false);
+					$API->write('=.id=' . $ARREMD[$i]['.id']);
+					$READ = $API->read();
+
+				}
+			}
+
+		}
+		echo "<script>window.location='./?report=selling&session=" . $session . "'</script>";
+	}
+
+	if ($prefix != "") {
+		$fprefix = "-prefix-[" . $prefix . "]";
+	} else {
+		$fprefix = "";
+	}
+	if (strlen($idhr) > "0") {
+		if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+			$getData = $API->comm("/system/script/print", array(
+				"?source" => "$idhr",
+			));
+			$TotalReg = count($getData);
+		}
+		$filedownload = $idhr;
+		$shf = "hidden";
+		$shd = "inline-block";
+	} elseif (strlen($idbl) > "0") {
+		if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+			$getData = $API->comm("/system/script/print", array(
+				"?owner" => "$idbl",
+			));
+			$TotalReg = count($getData);
+		}
+		$filedownload = $idbl;
+		$shf = "hidden";
+		$shd = "inline-block";
+	} elseif ($idhr == "" || $idbl == "") {
+		if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+			$getData = $API->comm("/system/script/print", array(
+				"?comment" => "mikhmon",
+			));
+			$TotalReg = count($getData);
+		}
+		$filedownload = "all";
+		$shf = "text";
+		$shd = "none";
+	} elseif (strlen($idbl) > "0" ) {
+		if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+			$getData = $API->comm("/system/script/print", array(
+				"?owner" => "$idbl",
+			));
+			$TotalReg = count($getData);
+		}
+		$filedownload = $idbl;
+		$shf = "hidden";
+		$shd = "inline-block";
+	}
+	
+}
+?>
+		<script>
+			function downloadCSV(csv, filename) {
+			  var csvFile;
+			  var downloadLink;
+			  // CSV file
+			  csvFile = new Blob([csv], {type: "text/csv"});
+			  // Download link
+			  downloadLink = document.createElement("a");
+			  // File name
+			  downloadLink.download = filename;
+			  // Create a link to the file
+			  downloadLink.href = window.URL.createObjectURL(csvFile);
+			  // Hide download link
+			  downloadLink.style.display = "none";
+			  // Add the link to DOM
+			  document.body.appendChild(downloadLink);
+			  // Click download link
+			  downloadLink.click();
+			  }
+			  
+			  function exportTableToCSV(filename) {
+			    var csv = [];
+			    var rows = document.querySelectorAll("#dataTable tr");
+			    
+			   for (var i = 0; i < rows.length; i++) {
+			      var row = [], cols = rows[i].querySelectorAll("td, th");
+			   for (var j = 0; j < cols.length; j++)
+            row.push(cols[j].innerText);
+        csv.push(row.join(","));
+        }
+        // Download CSV file
+        downloadCSV(csv.join("\n"), filename);
+        }
+
+// https://stackoverflow.com/questions/33218607/use-inline-css-to-apply-usd-currency-format-within-html-table
+function number_format(number, decimals, dec_point, thousands_sep) {
+
+  number = (number + '')
+    .replace(/[^0-9+\-Ee.]/g, '');
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+    s = '',
+    toFixedFix = function(n, prec) {
+      var k = Math.pow(10, prec);
+      return '' + (Math.round(n * k) / k)
+        .toFixed(prec);
+    };
+  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n))
+    .split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '')
+    .length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1)
+      .join('0');
+  }
+  return s.join(dec);
+}
+        
+		window.onload=function() {
+          var sum = 0;
+          var dataTable = document.getElementById("selling");
+          
+          // use querySelector to find all second table cells
+          var cells = document.querySelectorAll("td + td + td + td + td + td");
+          for (var i = 0; i < cells.length; i++)
+          sum+=parseFloat(cells[i].firstChild.data);
+          
+          var th = document.getElementById('total');
+    <?php if ($currency == in_array($currency, $cekindo['indo'])) {
+      echo 'th.innerHTML = "'.$currency.' " + number_format(th.innerHTML + (sum),"","",".") ;';
+		} else {
+			echo 'th.innerHTML = "'.$currency.' " + number_format(th.innerHTML + (sum),2,".",",") ;';
+		} ?>
+		
+		var tables = document.getElementsByTagName('tbody');
+    var table = tables[tables.length -1];
+    var rows = table.rows;
+    for(var i = 0, td; i < rows.length; i++){
+        td = document.createElement('td');
+        td.appendChild(document.createTextNode(i + 1));
+        rows[i].insertBefore(td, rows[i].firstChild);
+    }
+        }
+		</script>
+
+<style>
+        input[type="password"]::placeholder {
+            
+            /* Firefox, Chrome, Opera */
+            text-align: center;
+        }
+        input[type="text"]::placeholder {
+            
+            /* Firefox, Chrome, Opera */
+            text-align: center;
+        }
+        input[type="tel"]::placeholder {
+            
+            /* Firefox, Chrome, Opera */
+            text-align: center;
+        }
+        input[type="email"]:-ms-input-placeholder {
+            
+            /* Internet Explorer 10-11 */
+            text-align: center;
+        }
+        input[type="email"]::-ms-input-placeholder {
+            
+            /* Microsoft Edge */
+            text-align: center;
+        }
+        body {
+            text-align:center;
+        }
+        h1 {
+            color:green;
+        }
+    </style>
+
+
+
+
+
+<center>
+<script>
+$(document).ready(function(){
+  $("#openResume").click(function(){
+    notify("Calculating data");
+    window.location = "./?report=resume-report&idbl=<?= $idbl;?>&session=<?= $session;?>"
+  });
+});
+</script>
+<div class="row">
+<div class="col-12">
+<div class="card">
+<div class="card-header">
+	<h3><center>Cek Riwayat Aktivasi Voucher <?= ucfirst($idhr) . ucfirst(substr($idbl,0,3).' '.substr($idbl,3,5));	if ($prefix != "") {echo " prefix [" . $prefix . "]";} ?> <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i> <?= $_processing ?> </i></small></h3>
+</div>
+<div class="row">
+	<div class="row">
+	<div class="col-12">
+		<div style="padding-bottom: 5px; padding-top: 5px;">
+		  <td class="align-middle"><input id="filterTable" type="text" class="form-control" style="float:center; margin-top: 0px; max-width: 300px;" placeholder="masukan kode voucher disini..."> &nbsp;lalu tekan enter</td>
+
+</div>
+<td class="align-middle">jika tidak tertera, Kode Voucher belum digunakan </td></br>
+<td class="align-middle">atau tidak terdaftar / lebih dari 3 bulan aktivasi </td>
+
+		</div>
+
+
+        </div>
+	</div>
+	
+			</div>
+            <div class="input-group-2 col-box-3">
+				
+			</div>
+			<script type="text/javascript">
+				
+				function filterR(){
+					var D = document.getElementById('D').value;
+					var M = document.getElementById('M').value;
+					var Y = document.getElementById('Y').value;
+					var X = document.getElementById('filterTable').value;
+
+					if(D !== ""){
+						window.location='./?report=selling&idhr='+M+'/'+D+'/'+Y+'&prefix='+X+'&session=<?= $session; ?>';
+					}else if(D === ""){
+						window.location='./?report=selling&idbl='+M+Y+'&prefix='+X+'&session=<?= $session; ?>';
+					}
+					
+				}
+			</script>
+
+		</div></center>
+		  <div class="overflow box-bordered" style="max-height: 19vh">
+			<table id="dataTable" class="row">
+
+
+</b>
+				  
+				  
+
+			<table id="dataTable" class="table table-bordered table-hover text-nowrap">
+				<thead class="thead-light">
+				<tr>
+
+					<th >Waktu</th>
+					<th >Aktivasi</th>
+					<th >Paket</th>
+					<th >Voucher</th>
+				</tr>
+				</thead>
+				<tbody>
+				<?php
+			if ($prefix != "") {
+				for ($i = 0; $i < $TotalReg; $i++) {
+					$getname = explode("-|-", $getData[$i]['name']);
+					if (substr($getname[2], 0, strlen($prefix)) == $prefix) {
+					echo "<tr>";
+					echo "<td>";
+					$tgl = $getname[0];
+					echo $tgl;
+					echo "</td>";
+					echo "<td>";
+					$ltime = $getname[1];
+					echo $ltime;
+					echo "</td>";
+					echo "<td>";
+					$profile = $getname[7];
+					echo $profile;
+					echo "</td>";
+					echo "<td>";
+					$username = $getname[2];
+					echo $username;
+					echo "</td>";
+					echo "</tr>";
+
+					}
+				}
+			} else {
+				for ($i = 0; $i < $TotalReg; $i++) {
+					$getname = explode("-|-", $getData[$i]['name']);
+					echo "<tr>";
+					echo "<td>";
+					$tgl = $getname[0];
+					echo $tgl;
+					echo "</td>";
+					echo "<td>";
+					$ltime = $getname[1];
+					echo $ltime;
+					echo "</td>";
+					echo "<td>";
+					$profile = $getname[7];
+					echo $profile;
+					echo "</td>";
+					echo "<td>";
+					$username = $getname[2];
+					echo $username;
+					echo "</td>";
+					echo "</tr>";
+				
+				$dataresume .= $getname[0].$getname[3];
+				$totalresume += $getname[3];
+				$_SESSION['dataresume'] = $dataresume;
+				$_SESSION['totalresume'] = $TotalReg.'/'.$totalresume;
+				}
+					
+			}
+
+			?>
+			</tbody>
+			</table>
+		
+<div class="row">
+<div class="col-12">
+<div class="card">
+	</div>
+<div class="row">
+	<div class="row">
+	<div class="col-12">
+		<div style="padding-bottom: 5px; padding-top: 5px;">
+		  
+		  <button class="btn bg-primary" onclick="location.href='./?report=selling&session=<?= $session; ?>';" title="Reload all data"><i class="fa fa-search"></i> cek ulang</button>
+
+		</div>
+	</div>
+	</div>
+
+</div>
+</div>
+</div>
+</div>
+<div class="login-box" style="padding-top: 10px;">
+<h3 class="text-center">Cek Voucher<br>status : online</h3><br>
+
+
+<form autocomplete="off"class="form" method="post" action="">
+	<div class="input-group" hidden="true" >
+        <div class="input-group-7">
+			<input type="text" class="group-item group-item-l" name="nama" placeholder="<?= $title[1]; ?>" autofocus required="1" />
+		</div>
+		<div class="input-group-5">
+			<button type="submit" style="cursor: pointer; padding: 2.5px;" class="group-item group-item-r"><i class="fa fa-search"></i> <?= " " . $title[12]; ?></button>
+		</div>
+
+</div>
+</form>
+<?php
+if (isset($_POST['nama'])) {
+	$name = ($_POST['nama']);
+	if ($API->connect($iphost, $userhost, decrypt($passwdhost))) {
+		$getuser = $API->comm("/ip/hotspot/user/print", array("?name" => "$name"));
+		$user = $getuser[0]['name'];
+		$profile = $getuser[0]['profile'];
+		$exp = $getuser[0]['comment'];
+		$uptime = formatDTM($getuser[0]['uptime']);
+		$getbytein = $getuser[0]['bytes-in'];
+		$getbyteo = $getuser[0]['bytes-out'];
+		$getbytetot = ($getbytein + $getbyteo);
+		$bytetot = formatBytes($getbytetot, 2);
+		$limitup = $getuser[0]['limit-uptime'];
+		$limitbyte = $getuser[0]['limit-bytes-total'];
+		if ($limitbyte == "") {
+			$dataleft = "Unlimited";
+		} elseif ($limitbyte < $getbytetot) {
+			$dataleft = "0 Byte";
+		} else {
+			$dataleft = formatBytes($limitbyte - $getbytetot, 2);
+		}
+
+		$getprofile = $API->comm("/ip/hotspot/user/profile/print", array("?name" => "$profile", ));
+		$ponlogin = $getprofile[0]['on-login'];
+		$getvalid = explode(",", $ponlogin)[3];
+		$unit = substr($getvalid, -1);
+		if ($unit == "d") {
+			$getvalid = substr($getvalid, 0, strlen($getvalid) - 1) . " " . $title[13];
+		} elseif ($unit == "h") {
+			$getvalid = substr($getvalid, 0, strlen($getvalid) - 1) . " " . $title[14];
+		}
+
+
+	}
+  
+	if ($user == "" || (substr($exp,3,1) != "/" && substr($exp,6,1) != "/")) {
+		echo "<br><h3 class='text-center'>Kode Voucher <i style='color:#008CCA;'>$name</i> $title[9] expired</h3>";
+	} elseif ($limitup == "1s" || $uptime == $limitup || $getbyteo == $limitbyte) {
+		echo "<h3 class='text-center'>User <i style='color:#008CCA;'>$name</i> $title[10]</h3>";
+	}
+	if ($user == "" || (substr($exp,3,1) != "/" && substr($exp,6,1) != "/")) {
+	} else {
+		?>
+
+<section>
+<div class="card">
+<div class="card-header">
+    <h3>
+     
+        <center>info Riwayat Voucher
+    </h3>
+  </div>
+  <div class="card-body">
+  <?php
+	echo "<div style='overflow-x:auto;'>";
+	echo "<table class='table table-bordered table-hover text-nowrap'>";
+	echo "	<tr>";
+        echo "        <th >Kode Voucher</th>";
+	echo "		<td > $user</td>";
+	echo "	</tr>";
+	echo "	<tr>";
+        echo "        <th >Paket</th>";
+	echo "		<td > $profile</td>";
+	echo "	</tr>";
+	echo "	<tr>";
+        echo "        <th >Expired</th>";
+	echo "		<td >$exp</td>";
+	echo "	</tr>";
+	echo "	<tr>";
+        echo "        <th >Total Up/Down</th>";
+	echo "		<td > $bytetot</td>";
+	echo "	</tr>";
+
+}
+$API->disconnect();
+
+}
+
+?>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+<CENTER>
+<div align="center">
+
+</br>
+</div>
+
+</script>
+<CENTER>
+<div align="center">
+</b><b><font face="Arial, Helvetica, Sans Serif" size="3" color="#FFFFFF">
+<span id="clock">
+Copyright : 
+</script>
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+var dayaarray=new Array("openvpn.indoserver.de&#169;2005-")
+var dayarray=new Array("Minggu","Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu")
+var montharray=new Array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember")
+function getthedate(){
+var mydate=new Date()
+var year=mydate.getYear()
+if (year < 1000)
+year+=1900
+var day=mydate.getDay()
+var month=mydate.getMonth()
+var daym=mydate.getDate()
+if (daym<10)
+daym="0"+daym
+var hours=mydate.getHours()
+var minutes=mydate.getMinutes()
+var seconds=mydate.getSeconds()
+var dn=""
+
+{
+ d = new Date();
+ Time24H = new Date();
+ Time24H.setTime(d.getTime() + (d.getTimezoneOffset()*60000) + 3600000);
+ InternetTime = Math.round((Time24H.getHours()*60+Time24H.getMinutes()) / 1.44);
+ if (InternetTime < 10) InternetTime = '00'+InternetTime;
+ else if (InternetTime < 100) InternetTime = '0'+InternetTime;
+}
+if (hours<=9)
+hours="0"+hours
+if (minutes<=9)
+minutes="0"+minutes
+if (seconds<=9)
+seconds="0"+seconds
+//change font size here
+var cdate=dayaarray+""+year+" <br\> "+dayarray[day]+", "+daym+" "+montharray[month]+" "+year+" "+hours+":"+minutes+":"+seconds+" "+dn+""
+
+if (document.all)
+document.all.clock.innerHTML=cdate
+else if (document.getElementById)
+document.getElementById("clock").innerHTML=cdate
+else
+document.write(cdate)
+}
+if (!document.all&&!document.getElementById)
+getthedate()
+function goforit(){
+if (document.all||document.getElementById)
+setInterval("getthedate()",1000)
+}
+window.onload=goforit
+//  End -->
+</script></object>
+
+</OBJECT>			 			  			
+</table>
+</div>
+</script>
+
+<script type="text/javascript">
+<!--
+  document.login.username.focus();
+//-->
+</script>
+
+
+</div>
+</div>
+</body>
+
+

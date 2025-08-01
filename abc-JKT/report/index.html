@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>WiFi online</title>
+		<meta charset="utf-8">
+		<meta http-equiv="cache-control" content="private" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Theme color -->
+		<meta name="theme-color" content="#3a4149" />
+		<!-- Font Awesome -->
+		<link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css" />
+		<!-- Mikhmon UI -->
+		<link rel="stylesheet" href="css/mikhmon-ui.dark.min.css">
+                <!-- jQuery -->
+		<script src="js/jquery.min.js"></script>
+		<!-- pace -->
+		<link href="css/pace.dark.css" rel="stylesheet" />
+		<script src="js/pace.min.js"></script>
+		
+	</head>
+	<body>
+		<div class="wrapper">
+
+			
+<center><span style="display:none;" id="idto">disable</span>
+
+
+
+<div id="main">  
+<div id="loading" class="lds-dual-ring"></div>
+<div class="main-container" style="display:none">
+</CENTER>
+  <a id="logout" href="http://10.69.33.1" > Lokasi : 10.8.0.12:12010/abc-JKT&nbsp;&nbsp;-&nbsp;&nbsp;Keluar&nbsp;&nbsp;<i class="fa fa-sign-out mr-1"></i></a>
+  
+
+</CENTER>
+		<script>
+			function downloadCSV(csv, filename) {
+			  var csvFile;
+			  var downloadLink;
+			  // CSV file
+			  csvFile = new Blob([csv], {type: "text/csv"});
+			  // Download link
+			  downloadLink = document.createElement("a");
+			  // File name
+			  downloadLink.download = filename;
+			  // Create a link to the file
+			  downloadLink.href = window.URL.createObjectURL(csvFile);
+			  // Hide download link
+			  downloadLink.style.display = "none";
+			  // Add the link to DOM
+			  document.body.appendChild(downloadLink);
+			  // Click download link
+			  downloadLink.click();
+			  }
+			  
+			  function exportTableToCSV(filename) {
+			    var csv = [];
+			    var rows = document.querySelectorAll("#dataTable tr");
+			    
+			   for (var i = 0; i < rows.length; i++) {
+			      var row = [], cols = rows[i].querySelectorAll("td, th");
+			   for (var j = 0; j < cols.length; j++)
+            row.push(cols[j].innerText);
+        csv.push(row.join(","));
+        }
+        // Download CSV file
+        downloadCSV(csv.join("\n"), filename);
+        }
+
+// https://stackoverflow.com/questions/33218607/use-inline-css-to-apply-usd-currency-format-within-html-table
+function number_format(number, decimals, dec_point, thousands_sep) {
+
+  number = (number + '')
+    .replace(/[^0-9+\-Ee.]/g, '');
+  var n = !isFinite(+number) ? 0 : +number,
+    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+    s = '',
+    toFixedFix = function(n, prec) {
+      var k = Math.pow(10, prec);
+      return '' + (Math.round(n * k) / k)
+        .toFixed(prec);
+    };
+  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n))
+    .split('.');
+  if (s[0].length > 3) {
+    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+  }
+  if ((s[1] || '')
+    .length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1)
+      .join('0');
+  }
+  return s.join(dec);
+}
+        
+		window.onload=function() {
+          var sum = 0;
+          var dataTable = document.getElementById("selling");
+          
+          // use querySelector to find all second table cells
+          var cells = document.querySelectorAll("td + td + td + td + td + td");
+          for (var i = 0; i < cells.length; i++)
+          sum+=parseFloat(cells[i].firstChild.data);
+          
+          var th = document.getElementById('total');
+    th.innerHTML = "cek " + number_format(th.innerHTML + (sum),2,".",",") ;		
+		var tables = document.getElementsByTagName('tbody');
+    var table = tables[tables.length -1];
+    var rows = table.rows;
+    for(var i = 0, td; i < rows.length; i++){
+        td = document.createElement('td');
+        td.appendChild(document.createTextNode(i + 1));
+        rows[i].insertBefore(td, rows[i].firstChild);
+    }
+        }
+		</script>
+
+<style>
+        input[type="password"]::placeholder {
+            
+            /* Firefox, Chrome, Opera */
+            text-align: center;
+        }
+        input[type="text"]::placeholder {
+            
+            /* Firefox, Chrome, Opera */
+            text-align: center;
+        }
+        input[type="tel"]::placeholder {
+            
+            /* Firefox, Chrome, Opera */
+            text-align: center;
+        }
+        input[type="email"]:-ms-input-placeholder {
+            
+            /* Internet Explorer 10-11 */
+            text-align: center;
+        }
+        input[type="email"]::-ms-input-placeholder {
+            
+            /* Microsoft Edge */
+            text-align: center;
+        }
+        body {
+            text-align:center;
+        }
+        h1 {
+            color:green;
+        }
+    </style>
+
+
+
+
+
+<center>
+<script>
+$(document).ready(function(){
+  $("#openResume").click(function(){
+    notify("Calculating data");
+    window.location = "./?report=resume-report&idbl=&session=cek"
+  });
+});
+</script>
+<div class="row">
+<div class="col-12">
+<div class="card">
+<div class="card-header">
+	<h3><center>Cek Riwayat Aktivasi Voucher   <small id="loader" style="display: none;" ><i><i class='fa fa-circle-o-notch fa-spin'></i>  </i></small></h3>
+</div>
+<div class="row">
+	<div class="row">
+	<div class="col-12">
+		<div style="padding-bottom: 5px; padding-top: 5px;">
+		  <td class="align-middle"><input id="filterTable" type="text" class="form-control" style="float:center; margin-top: 0px; max-width: 300px;" placeholder="masukan kode voucher disini..."> &nbsp;lalu tekan enter</td>
+
+</div>
+<td class="align-middle">jika tidak tertera, Kode Voucher belum digunakan </td></br>
+<td class="align-middle">atau tidak terdaftar / lebih dari 3 bulan aktivasi </td>
+
+		</div>
+
+
+        </div>
+	</div>
+	
+			</div>
+            <div class="input-group-2 col-box-3">
+				
+			</div>
+			<script type="text/javascript">
+				
+				function filterR(){
+					var D = document.getElementById('D').value;
+					var M = document.getElementById('M').value;
+					var Y = document.getElementById('Y').value;
+					var X = document.getElementById('filterTable').value;
+
+					if(D !== ""){
+						window.location='./?report=selling&idhr='+M+'/'+D+'/'+Y+'&prefix='+X+'&session=cek';
+					}else if(D === ""){
+						window.location='./?report=selling&idbl='+M+Y+'&prefix='+X+'&session=cek';
+					}
+					
+				}
+			</script>
+
+		</div></center>
+		  <div class="overflow box-bordered" style="max-height: 19vh">
+			<table id="dataTable" class="row">
+
+
+</b>
+				  
+				  
+
+			<table id="dataTable" class="table table-bordered table-hover text-nowrap">
+				<thead class="thead-light">
+				<tr>
+
+					<th >Waktu</th>
+					<th >Aktivasi</th>
+					<th >Paket</th>
+					<th >Voucher</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr><td>jun/25/2025</td><td>22:37:29</td><td>Vc0x-4-JAM</td><td>08555</td></tr><tr><td>jul/29/2025</td><td>23:39:25</td><td>Vc0x-1-JAM</td><td>0111</td></tr>			</tbody>
+			</table>
+		
+<div class="row">
+<div class="col-12">
+<div class="card">
+	</div>
+<div class="row">
+	<div class="row">
+	<div class="col-12">
+		<div style="padding-bottom: 5px; padding-top: 5px;">
+		  
+		  <button class="btn bg-primary" onclick="location.href='./?report=selling&session=cek';" title="Reload all data"><i class="fa fa-search"></i> cek ulang</button>
+
+		</div>
+	</div>
+	</div>
+
+</div>
+</div>
+</div>
+</div>
+<div class="login-box" style="padding-top: 10px;">
+<h3 class="text-center">Cek Voucher<br>status : online</h3><br>
+
+
+<form autocomplete="off"class="form" method="post" action="">
+	<div class="input-group" hidden="true" >
+        <div class="input-group-7">
+			<input type="text" class="group-item group-item-l" name="nama" placeholder="" autofocus required="1" />
+		</div>
+		<div class="input-group-5">
+			<button type="submit" style="cursor: pointer; padding: 2.5px;" class="group-item group-item-r"><i class="fa fa-search"></i>  </button>
+		</div>
+
+</div>
+</form>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+<CENTER>
+<div align="center">
+
+</br>
+</div>
+
+</script>
+<CENTER>
+<div align="center">
+</b><b><font face="Arial, Helvetica, Sans Serif" size="3" color="#FFFFFF">
+<span id="clock">
+Copyright : 
+</script>
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+var dayaarray=new Array("openvpn.indoserver.de&#169;2005-")
+var dayarray=new Array("Minggu","Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu")
+var montharray=new Array("Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember")
+function getthedate(){
+var mydate=new Date()
+var year=mydate.getYear()
+if (year < 1000)
+year+=1900
+var day=mydate.getDay()
+var month=mydate.getMonth()
+var daym=mydate.getDate()
+if (daym<10)
+daym="0"+daym
+var hours=mydate.getHours()
+var minutes=mydate.getMinutes()
+var seconds=mydate.getSeconds()
+var dn=""
+
+{
+ d = new Date();
+ Time24H = new Date();
+ Time24H.setTime(d.getTime() + (d.getTimezoneOffset()*60000) + 3600000);
+ InternetTime = Math.round((Time24H.getHours()*60+Time24H.getMinutes()) / 1.44);
+ if (InternetTime < 10) InternetTime = '00'+InternetTime;
+ else if (InternetTime < 100) InternetTime = '0'+InternetTime;
+}
+if (hours<=9)
+hours="0"+hours
+if (minutes<=9)
+minutes="0"+minutes
+if (seconds<=9)
+seconds="0"+seconds
+//change font size here
+var cdate=dayaarray+""+year+" <br\> "+dayarray[day]+", "+daym+" "+montharray[month]+" "+year+" "+hours+":"+minutes+":"+seconds+" "+dn+""
+
+if (document.all)
+document.all.clock.innerHTML=cdate
+else if (document.getElementById)
+document.getElementById("clock").innerHTML=cdate
+else
+document.write(cdate)
+}
+if (!document.all&&!document.getElementById)
+getthedate()
+function goforit(){
+if (document.all||document.getElementById)
+setInterval("getthedate()",1000)
+}
+window.onload=goforit
+//  End -->
+</script></object>
+
+</OBJECT>			 			  			
+</table>
+</div>
+</script>
+
+<script type="text/javascript">
+<!--
+  document.login.username.focus();
+//-->
+</script>
+
+
+</div>
+</div>
+</body>
+
+
+
+</div>
+</div>
+</div>
+<script src="./js/highcharts/highcharts.js"></script>
+<script src="./js/highcharts/themes/hc.dark.js"></script>
+<script src="./js/mikhmon-ui.dark.min.js"></script>
+<script src="./js/mikhmon.js?t=2025-08-01_23:49:03"></script>
+
+
+<script>
+$(document).ready(function(){
+  makeAllSortable();
+  $("#filterTable").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#dataTable tbody tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+
+</script>
+</body>
+</html>
+

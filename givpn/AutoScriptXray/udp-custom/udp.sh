@@ -8,13 +8,11 @@ NC='\e[0m'
 cd
 echo "\e[1;32m Update Menu.. \e[0m"
 sleep 1
-wget -q -O /usr/bin/usernew https://raw.githubusercontent.com/givpn/AutoScriptXray/master/udp-custom/ssh/udpnew.sh
-wget -q -O /usr/bin/trial https://raw.githubusercontent.com/givpn/AutoScriptXray/master/udp-custom/ssh/trial.sh
+wget -q -O /usr/bin/udpnew https://raw.githubusercontent.com/givpn/AutoScriptXray/master/udp-custom/ssh/udpnew.sh
 echo "\e[1;32m Proses Download Script Slowdns.. \e[0m"
 wget https://raw.githubusercontent.com/givpn/AutoScriptXray/master/udp-custom/slowdns/slowdns.sh && chmod +x slowdns.sh && ./slowdns.sh
 sleep 1
-chmod +x /usr/bin/usernew
-chmod +x /usr/bin/trial
+chmod +x /usr/bin/udpnew
 rm -rf /root/udp
 mkdir -p /root/udp
 # install udp-custom

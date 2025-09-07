@@ -8,9 +8,9 @@ NC='\e[0m'
 cd
 echo "\e[1;32m Update Menu.. \e[0m"
 sleep 1
-wget -q -O /usr/bin/udpnew https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/givpn/AutoScriptXray/master/udp-custom/ssh/udpnew.sh
+wget -q -O /usr/bin/udpnew https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/master/givpn/AutoScriptXray/udp-custom/ssh/udpnew.sh
 echo "\e[1;32m Proses Download Script Slowdns.. \e[0m"
-wget https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/givpn/AutoScriptXray/master/udp-custom/slowdns/slowdns.sh && chmod +x slowdns.sh && ./slowdns.sh
+wget https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/master/givpn/AutoScriptXray/udp-custom/slowdns/slowdns.sh && chmod +x slowdns.sh && ./slowdns.sh
 sleep 1
 chmod +x /usr/bin/udpnew
 rm -rf /root/udp
@@ -30,7 +30,7 @@ clear
 echo "\e[1;32m Please Waiting Proses Downloading Toll UdpCustom.. \e[0m"
 sleep 1
 clear
-wget -q --show-progress --load-cookies /tmp/cookies.txt "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/givpn/AutoScriptXray/raw/master/udp-custom/udp-custom-linux-amd64" -O /root/udp/udp-custom && rm -rf /tmp/cookies.txt
+wget -q --show-progress --load-cookies /tmp/cookies.txt "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/master/givpn/AutoScriptXray/udp-custom/udp-custom-linux-amd64" -O /root/udp/udp-custom && rm -rf /tmp/cookies.txt
 chmod +x /root/udp/udp-custom
 clear
 # install Config Default Udp
@@ -48,7 +48,7 @@ clear
 echo "\e[1;32m Please Waiting Proses Downloading Default Config UdpCustom.. \e[0m"
 sleep 1
 clear
-wget -q --show-progress --load-cookies /tmp/cookies.txt "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/givpn/AutoScriptXray/raw/master/udp-custom/config.json" -O /root/udp/config.json && rm -rf /tmp/cookies.txt
+wget -q --show-progress --load-cookies /tmp/cookies.txt "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/master/givpn/AutoScriptXray/udp-custom/config.json" -O /root/udp/config.json && rm -rf /tmp/cookies.txt
 chmod 644 /root/udp/config.json
 
 if [ -z "$1" ]; then

@@ -20,7 +20,7 @@ The "UDP Custom Manager" script enables UDP on a 64-bit VPS, provides functional
 
 1. Download and run the installation script:
     ```sh
-    wget "wget "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/UDP-Custom-Script-main/install.sh" -O install.sh && chmod +x install.sh && bash install.sh
+    wget "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/UDP-Custom-Script-main/install.sh" -O install.sh && chmod +x install.sh && bash install.sh
     ```
 
 

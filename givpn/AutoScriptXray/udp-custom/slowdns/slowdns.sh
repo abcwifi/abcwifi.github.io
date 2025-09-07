@@ -1,8 +1,6 @@
 # =========================================
 # Quick Setup | Script Setup Manager
 # Edition : Stable Edition 1.0
-# Auther  : givpn
-# Kuota Habisss
 # (C) Copyright 2023
 # =========================================
 # pewarna hidup
@@ -60,10 +58,10 @@ service sshd restart
 #konfigurasi slowdns
 rm -rf /etc/slowdns
 mkdir -m 777 /etc/slowdns
-wget -q -O /etc/slowdns/server.key "https://raw.githubusercontent.com/fisabiliyusri/SLDNS/main/slowdns/server.key"
-wget -q -O /etc/slowdns/server.pub "https://raw.githubusercontent.com/fisabiliyusri/SLDNS/main/slowdns/server.pub"
-wget -q -O /etc/slowdns/sldns-server "https://raw.githubusercontent.com/fisabiliyusri/SLDNS/main/slowdns/sldns-server"
-wget -q -O /etc/slowdns/sldns-client "https://raw.githubusercontent.com/fisabiliyusri/SLDNS/main/slowdns/sldns-client"
+wget -q -O /etc/slowdns/server.key "https://raw.githubusercontent.com/givpn/AutoScriptXray/SLDNS/main/slowdns/server.key"
+wget -q -O /etc/slowdns/server.pub "https://raw.githubusercontent.com/givpn/AutoScriptXray/SLDNS/main/slowdns/server.pub"
+wget -q -O /etc/slowdns/sldns-server "https://raw.githubusercontent.com/givpn/AutoScriptXray/SLDNS/main/slowdns/sldns-server"
+wget -q -O /etc/slowdns/sldns-client "https://raw.githubusercontent.com/givpn/AutoScriptXray/SLDNS/main/slowdns/sldns-client"
 cd
 chmod +x /etc/slowdns/server.key
 chmod +x /etc/slowdns/server.pub
@@ -71,8 +69,8 @@ chmod +x /etc/slowdns/sldns-server
 chmod +x /etc/slowdns/sldns-client
 
 cd
-#wget -q -O /etc/systemd/system/client-sldns.service "https://raw.githubusercontent.com/fisabiliyusri/SLDNS/main/slowdns/client-sldns.service"
-#wget -q -O /etc/systemd/system/server-sldns.service "https://raw.githubusercontent.com/fisabiliyusri/SLDNS/main/slowdns/server-sldns.service"
+#wget -q -O /etc/systemd/system/client-sldns.service "https://raw.githubusercontent.com/givpn/AutoScriptXray/SLDNS/main/slowdns/client-sldns.service"
+#wget -q -O /etc/systemd/system/server-sldns.service "https://raw.githubusercontent.com/givpn/AutoScriptXray/SLDNS/main/slowdns/server-sldns.service"
 
 cd
 #install client-sldns.service

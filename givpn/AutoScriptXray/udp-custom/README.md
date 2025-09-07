@@ -6,7 +6,7 @@
 apt update && apt install wget -y && wget -qO- -O udp.sh "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/givpn/AutoScriptXray/master/udp-custom/udp.sh" && chmod +x udp.sh && ./udp.sh
 ```
 - NS Pointing
-![Service Status](https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/givpn/AutoScriptXray/master/udp-custom/slowdns/nspointing.png)
+![Service Status](https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/master/givpn/AutoScriptXray/udp-custom/slowdns/nspointing.png)
 
 
 

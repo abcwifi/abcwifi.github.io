@@ -20,8 +20,7 @@ apt-get update
 apt-get upgrade -y
 
 echo -e "\e[96mInstalling dependancies\e[0m"
-apt-get install -y libnss3* libnspr4-dev gyp ninja-build git cmake libz-dev build-essential 
-apt-get install -y pkg-config cmake-data net-tools libssl-dev dnsutils speedtest-cli psmisc
+apt-get install -y libnss3* libnspr4-dev gyp ninja-build git cmake libz-dev build-essential
 apt-get install -y dropbear stunnel4
 
 pubip="$(dig +short myip.opendns.com @resolver1.opendns.com)"

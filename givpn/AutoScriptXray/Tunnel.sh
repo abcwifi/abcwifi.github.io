@@ -16,8 +16,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 100
 fi
 
-apt-get update
-apt-get upgrade -y
 
 echo -e "\e[96mInstalling dependancies\e[0m"
 apt-get install -y libnss3* libnspr4-dev gyp ninja-build git cmake libz-dev build-essential 

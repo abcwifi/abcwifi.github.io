@@ -20,20 +20,10 @@ apt-get update
 apt-get upgrade -y
 
 echo -e "\e[96mInstalling dependancies\e[0m"
-apt-get install -y libnss3* libnspr4-dev gyp ninja-build git cmake libz-dev build-essential
+apt-get install -y libnss3* libnspr4-dev gyp ninja-build git cmake libz-dev build-essential 
+apt-get install -y pkg-config cmake-data net-tools libssl-dev dnsutils speedtest-cli psmisc
 apt-get install -y dropbear stunnel4
 
-pubip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
-if [ "$pubip" == "" ];then
-    pubip=`ifconfig eth0 | awk 'NR==2 {print $2}'`
-fi
-if [ "$pubip" == "" ];then
-    pubip=`ifconfig ens3 | awk 'NR==2 {print $2}'`
-fi
-if [ "$pubip" == "" ];then
-    echo -e "\e[95mIncompatible Server!.\e[0m" 1>&2
-    exit 100
-fi
 
 echo -e "\e[96mChecking dropbear is installed\e[0m"
 FILE=/etc/default/dropbear
@@ -109,43 +99,6 @@ sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 echo -e "\e[96mStarting stunnel services\e[0m"
 /etc/init.d/stunnel4 start
 
-echo -e "\e[96mCompile and installing badvpn\e[0m"
-if [ ! -d "/root/badvpn/" ] 
-then
-    sudo dpkg --configure -a
-	git clone https://github.com/ambrop72/badvpn.git /root/badvpn
-	cd /root/badvpn/
-	cmake /root/badvpn/ -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_SERVER=1 -DBUILD_CLIENT=1 -DBUILD_UDPGW=1 -DBUILD_TUN2SOCKS=1 && make
-	make install
-fi
-
-echo -e "\e[96mChecking rc.local is exist\e[0m"
-FILE4=/etc/rc.local
-if [ -f "$FILE4" ]; then
-    cp "$FILE4" /etc/rc.local.bak
-    rm "$FILE4"
-fi
-
-echo -e "\e[96mCreating rc.local\e[0m"
-cat >> "$FILE4" <<EOL
-#!/bin/sh -e
-#
-# rc.local
-#
-# This script is executed at the end of each multiuser runlevel.
-# Make sure that the script will "exit 0" on success or any other
-# value on error.
-#
-# In order to enable or disable this script just change the execution
-# bits.
-#
-# By default this script does nothing.
-badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 999 --client-socket-sndbuf 1048576
-exit 0
-EOL
-
-echo -e "\e[96mSetting up permissions for rc.local\e[0m"
-chmod +x /etc/rc.local
 
 echo -e "\e[96mInstalling squid\e[0m"
 apt-get install -y squid

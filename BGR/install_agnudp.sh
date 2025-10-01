@@ -762,7 +762,7 @@ setup_ssl() {
 
     openssl req -newkey rsa:2048 -nodes -keyout /etc/hysteria/hysteria.server.key -subj "/C=CN/ST=GD/L=SZ/O=Hysteria, Inc./CN=$DOMAIN" -out /etc/hysteria/hysteria.server.csr
 
-    openssl x509 -req -extfile <(printf "subjectAltName=DNS:syahdan.indoserver.de,DNS:syahdan.indoserver.de,keyUsage=digitalSignature,tlsfeature=status_request") -days 3650 -in /etc/hysteria/hysteria.server.csr -CA /etc/hysteria/hysteria.ca.crt -CAkey /etc/hysteria/hysteria.ca.key -CAcreateserial -out /etc/hysteria/hysteria.server.crt
+    openssl x509 -req -extfile <(printf "subjectAltName=DNS:syahdan.indoserver.de,DNS:syahdan.indoserver.de,keyUsage=digitalSignature") -days 3650 -in /etc/hysteria/hysteria.server.csr -CA /etc/hysteria/hysteria.ca.crt -CAkey /etc/hysteria/hysteria.ca.key -CAcreateserial -out /etc/hysteria/hysteria.server.crt
 }
 
 start_services() {

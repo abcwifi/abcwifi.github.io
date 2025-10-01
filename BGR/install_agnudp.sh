@@ -756,13 +756,21 @@ perform_remove() {
 setup_ssl() {
     echo "Installing SSL certificates"
 
+    openssl genrsa -out /etc/hysteria/privatekey.pem 2048
+
+    openssl dgst -sha256 -sign /etc/hysteria/privatekey.pem -out data.txt.signature /etc/hysteria/data.txt
+
+    openssl rsa -in /etc/hysteria/privatekey.pem -outform PEM -pubout -out /etc/hysteria/publickey.pem
+
+    openssl dgst -sha256 -verify /etc/hysteria/publickey.pem -signature data.txt.signature /etc/hysteria/data.txt
+
     openssl genrsa -out /etc/hysteria/hysteria.ca.key 2048
 
     openssl req -new -x509 -days 3650 -key /etc/hysteria/hysteria.ca.key -subj "/C=CN/ST=GD/L=SZ/O=Hysteria, Inc./CN=Hysteria Root CA" -out /etc/hysteria/hysteria.ca.crt
 
     openssl req -newkey rsa:2048 -nodes -keyout /etc/hysteria/hysteria.server.key -subj "/C=CN/ST=GD/L=SZ/O=Hysteria, Inc./CN=$DOMAIN" -out /etc/hysteria/hysteria.server.csr
 
-    openssl x509 -req -extfile <(printf "subjectAltName=DNS:syahdan.indoserver.de,DNS:syahdan.indoserver.de,keyUsage=digitalSignature") -days 3650 -in /etc/hysteria/hysteria.server.csr -CA /etc/hysteria/hysteria.ca.crt -CAkey /etc/hysteria/hysteria.ca.key -CAcreateserial -out /etc/hysteria/hysteria.server.crt
+    openssl x509 -req -extfile <(printf "subjectAltName=DNS:syahdan.indoserver.de,DNS:syahdan.indoserver.de") -days 3650 -in /etc/hysteria/hysteria.server.csr -CA /etc/hysteria/hysteria.ca.crt -CAkey /etc/hysteria/hysteria.ca.key -CAcreateserial -out /etc/hysteria/hysteria.server.crt
 }
 
 start_services() {

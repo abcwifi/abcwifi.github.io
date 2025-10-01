@@ -758,11 +758,11 @@ setup_ssl() {
 
     openssl genrsa -out /etc/hysteria/privatekey.pem 2048
 
-    openssl dgst -sha256 -sign privatekey.pem -out data.txt.signature data.txt
+    openssl dgst -sha256 -sign privatekey.pem -out data.txt.signature /etc/hysteria/data.txt
 
-    openssl rsa -in privatekey.pem -outform PEM -pubout -out publickey.pem
+    openssl rsa -in privatekey.pem -outform PEM -pubout -out /etc/hysteria/publickey.pem
 
-    openssl dgst -sha256 -verify publickey.pem -signature data.txt.signature data.txt
+    openssl dgst -sha256 -verify publickey.pem -signature data.txt.signature /etc/hysteria/data.txt
 
     openssl genrsa -out /etc/hysteria/hysteria.ca.key 2048
 

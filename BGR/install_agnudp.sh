@@ -641,7 +641,7 @@ perform_install_manager_script() {
     local _symlink_path="/usr/local/bin/agnudp"
     
     echo "Downloading manager script..."
-    curl -o "$_manager_script" "https://github.com/khaledagn/AGN-UDP/raw/main/agnudp_manager.sh"
+    curl -o "$_manager_script" "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/BGR/agnudp_manager.sh"
     chmod +x "$_manager_script"
     
     echo "Creating symbolic link to run the manager script using 'agnudp' command..."
@@ -718,16 +718,6 @@ perform_install() {
         echo
         echo -e "$(tbold)Congratulations! AGN-UDP has been successfully installed on your server.$(treset)"
         echo "Use 'agnudp' command to access the manager."
-
-        echo
-        echo -e "$(tbold)Client app AGN INJECTOR:$(treset)"
-        echo -e "$(tblue)https://play.google.com/store/apps/details?id=com.agn.injector$(treset)"
-        echo
-        echo -e "Follow me!"
-        echo
-        echo -e "\t+ Check out my website at $(tblue)https://www.khaledagn.me$(treset)"
-        echo -e "\t+ Follow me on Telegram: $(tblue)https://t.me/khaledagn$(treset)"
-        echo -e "\t+ Follow me on Facebook: $(tblue)https://facebook.com/itskhaledagn$(treset)"
         echo
     else
         restart_running_services

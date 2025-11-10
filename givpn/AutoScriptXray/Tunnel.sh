@@ -2,7 +2,7 @@
 # Version : 2.2.0
 
 # Domain Name
-DOMAIN="syahdan.indoserver.de"
+DOMAIN="connect.indoserver.de"
 
 setup_ssl() {
     echo "Installing SSL certificates"

@@ -6,12 +6,12 @@ DOMAIN="syahdan.indoserver.de"
 
 setup_ssl() {
     echo "Installing SSL certificates"
-
-    openssl genrsa -out /etc/hysteria/hysteria.ca.key 2048
-
+    openssl genrsa -out /etc/hysteria/hysteria.ca.key 2048  2048
     openssl req -new -x509 -days 3650 -key /etc/hysteria/hysteria.ca.key -subj "/C=CN/ST=GD/L=SZ/O=Hysteria, Inc./CN=Hysteria Root CA" -out /etc/hysteria/hysteria.ca.crt
-
     openssl req -newkey rsa:2048 -nodes -keyout /etc/hysteria/hysteria.server.key -subj "/C=CN/ST=GD/L=SZ/O=Hysteria, Inc./CN=$DOMAIN" -out /etc/hysteria/hysteria.server.csr
-
     openssl x509 -req -extfile <(printf "subjectAltName=DNS:$DOMAIN,DNS:$DOMAIN") -days 3650 -in /etc/hysteria/hysteria.server.csr -CA /etc/hysteria/hysteria.ca.crt -CAkey /etc/hysteria/hysteria.ca.key -CAcreateserial -out /etc/hysteria/hysteria.server.crt
+    openssl genpkey -algorithm RSA -out /etc/hysteria/hysteria.ca.key
+	openssl req -x509 -new -nodes -key /etc/hysteria/hysteria.ca.key -days 3650 -out /etc/hysteria/hysteria.ca.crt -subj "/C=CN/ST=GD/L=SZ/O=Hysteria, Inc./CN=Hysteria Root CA"
+    openssl req -newkey rsa:2048 -nodes -keyout /etc/hysteria/hysteria.server.key -subj "/C=CN/ST=GD/L=SZ/O=Hysteria, Inc./CN=$DOMAIN" -out /etc/hysteria/hysteria.server.csr
+    openssl x509 -req -extfile <(printf "subjectAltName=DNS:$DOMAIN") -days 3650 -in /etc/hysteria/hysteria.server.csr -CA /etc/hysteria/hysteria.ca.crt -CAkey /etc/hysteria/hysteria.ca.key -CAcreateserial -out /etc/hysteria/hysteria.server.crt
 }

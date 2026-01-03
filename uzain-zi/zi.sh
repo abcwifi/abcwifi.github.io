@@ -8,7 +8,7 @@ systemctl stop zivpn.service 1> /dev/null 2> /dev/null
 echo -e "Downloading UDP Service"
 wget https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/udp-zivpn-linux-amd64 -O /root/udp/log/ 1> /dev/null 2> /dev/null
 chmod +x /root/udp/log/zivpn
-mkdir /root/udp/log/ 1> /dev/null 2> /dev/null
+mkdir /root/udp/log 1> /dev/null 2> /dev/null
 wget https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/uzain-zi/config.json -O /root/udp/log/config.json 1> /dev/null 2> /dev/null
 
 echo "Generating cert files:"

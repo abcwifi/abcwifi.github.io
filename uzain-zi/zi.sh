@@ -9,7 +9,7 @@ echo -e "Downloading UDP Service"
 wget https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/udp-zivpn-linux-amd64 -O /usr/local/bin/zivpn 1> /dev/null 2> /dev/null
 chmod +x /usr/local/bin/zivpn
 mkdir /etc/zivpn 1> /dev/null 2> /dev/null
-wget https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/config.json -O /etc/zivpn/config.json 1> /dev/null 2> /dev/null
+wget https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/uzain-zi/config.json -O /etc/zivpn/config.json 1> /dev/null 2> /dev/null
 
 echo "Generating cert files:"
 openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=US/ST=Jakarta/L=Indonesia/O=Example Corp/OU=IT Department/CN=zivpn" -keyout "/etc/zivpn/zivpn.key" -out "/etc/zivpn/zivpn.crt"

@@ -6,10 +6,10 @@ echo -e "Updating server"
 sudo apt-get update -y
 systemctl stop zivpn.service 1> /dev/null 2> /dev/null
 echo -e "Downloading UDP Service"
-wget https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/udp-zivpn-linux-amd64 -O /usr/local/bin/zivpn 1> /dev/null 2> /dev/null
-chmod +x /usr/local/bin/zivpn
-mkdir /etc/zivpn 1> /dev/null 2> /dev/null
-wget https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/uzain-zi/config.json -O /etc/zivpn/config.json 1> /dev/null 2> /dev/null
+wget https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/udp-zivpn-linux-amd64 -O /root/udp/log/ 1> /dev/null 2> /dev/null
+chmod +x /root/udp/log/zivpn
+mkdir /root/udp/log/ 1> /dev/null 2> /dev/null
+wget https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/uzain-zi/config.json -O /root/udp/log/config.json 1> /dev/null 2> /dev/null
 
 echo "Generating cert files:"
 openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=US/ST=Jakarta/L=Indonesia/O=Example Corp/OU=IT Department/CN=zivpn" -keyout "/etc/zivpn/zivpn.key" -out "/etc/zivpn/zivpn.crt"
@@ -23,8 +23,8 @@ After=network.target
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/etc/zivpn
-ExecStart=/usr/local/bin/zivpn server -c /etc/zivpn/config.json
+WorkingDirectory=/root/udp/log
+ExecStart=/root/udp/log/zivpn server -c /root/udp/log/config.json
 Restart=always
 RestartSec=3
 Environment=ZIVPN_LOG_LEVEL=info
@@ -55,8 +55,9 @@ sed -i -E "s/\"config\": ?\[[[:space:]]*\"zi\"[[:space:]]*\]/${new_config_str}/g
 
 systemctl enable zivpn.service
 systemctl start zivpn.service
-iptables -t nat -A PREROUTING -i $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -p udp --dport 6000:19999 -j DNAT --to-destination :5667
-ufw allow 6000:19999/udp
-ufw allow 5667/udp
+iptables -t nat -A PREROUTING -i $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -p udp --dport 1:65535 -j DNAT --to-destination :5667
+sudo apt install ufw -y
+ufw allow 1:65535/udp
+ufw allow 53/udp
 rm zi.* 1> /dev/null 2> /dev/null
 echo -e "ZIVPN UDP Installed"

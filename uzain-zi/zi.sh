@@ -24,7 +24,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/root/udp/log
-ExecStart=/root/udp/log/zivpn server -c /root/udp/log/config.json
+ExecStart=/root/udp/log/zivpn -config /root/udp/log/config.json server
 Restart=always
 RestartSec=3
 Environment=ZIVPN_LOG_LEVEL=info

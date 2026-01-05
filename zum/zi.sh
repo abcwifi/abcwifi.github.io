@@ -108,11 +108,7 @@ User=root
 WorkingDirectory=$Dir
 ExecStart=/usr/local/bin/zivpn server -c $Dir/config.json
 Restart=always
-RestartSec=3
-Environment=ZIVPN_LOG_LEVEL=info
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-NoNewPrivileges=true
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
@@ -126,10 +122,10 @@ Certificate() {
 }
 
 PostKernel() {
-  AppendLine "$Sysctl" "net.core.rmem_max=16777"
-  AppendLine "$Sysctl" "net.core.wmem_max=16777"
-  sysctl -w net.core.rmem_max=16777 1> /dev/null 2> /dev/null
-  sysctl -w net.core.wmem_max=16777 1> /dev/null 2> /dev/null
+  AppendLine "$Sysctl" "net.core.rmem_max=16777216"
+  AppendLine "$Sysctl" "net.core.wmem_max=16777216"
+  sysctl -w net.core.rmem_max=16777216 1> /dev/null 2> /dev/null
+  sysctl -w net.core.wmem_max=16777216 1> /dev/null 2> /dev/null
 }
 
 RoutingTables() {

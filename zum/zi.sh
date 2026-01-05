@@ -278,7 +278,6 @@ Install() {
   systemctl -q start zivpn
   
   if [[ $(systemctl is-active zivpn) == 'active' ]]; then
-    PostKernel
     RoutingTables
     RestoreConfig
     RestartZivpn

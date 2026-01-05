@@ -124,10 +124,10 @@ Certificate() {
 }
 
 PostKernel() {
-  AppendLine "$Sysctl" "net.core.rmem_max=0"
-  AppendLine "$Sysctl" "net.core.wmem_max=0"
-  sysctl -w net.core.rmem_max=0 1> /dev/null 2> /dev/null
-  sysctl -w net.core.wmem_max=16777216 1> /dev/null 2> /dev/null
+  AppendLine "$Sysctl" "net.core.rmem_max=99999999"
+  AppendLine "$Sysctl" "net.core.wmem_max=99999999"
+  sysctl -w net.core.rmem_max=99999999 1> /dev/null 2> /dev/null
+  sysctl -w net.core.wmem_max=99999999 1> /dev/null 2> /dev/null
 }
 
 RoutingTables() {

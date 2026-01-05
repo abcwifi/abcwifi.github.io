@@ -108,7 +108,11 @@ User=root
 WorkingDirectory=$Dir
 ExecStart=/usr/local/bin/zivpn server -c $Dir/config.json
 Restart=always
-RestartSec=5
+RestartSec=3
+Environment=ZIVPN_LOG_LEVEL=info
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
+NoNewPrivileges=true
 
 [Install]
 WantedBy=multi-user.target
@@ -380,7 +384,23 @@ main() {
   *)
     echo
     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo -e "Done"
+    echo -e "  🚀 ZIVPN UDP - Command Line Tool"
+    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo
+    echo -e "  📌 Usage:"
+    echo -e "    $0 <command>"
+    echo
+    echo -e "  🧩 Available Commands:"
+    echo -e "    install     ➜ Memasang ZIVPN UDP"
+    echo -e "    uninstall   ➜ Menghapus ZIVPN UDP"
+    echo -e "    backup      ➜ Backup konfigurasi ke:"
+    echo -e "                 $FileBackup"
+    echo -e "    restore     ➜ Restore konfigurasi dari:"
+    echo -e "                 $FileBackup"
+    echo -e "    add         ➜ Menambahkan akun"
+    echo -e "    del         ➜ Menghapus akun"
+    echo -e "    list        ➜ Menampilkan daftar akun"
+    echo
     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo
   ;;

@@ -1,8 +1,5 @@
 #!/bin/bash
-# Zivpn UDP Module installer
-# Creator Zahid Islam
-#
-# Script by Potato
+# Auto
 ##############################
 
 NIC=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1)
@@ -121,7 +118,7 @@ END
 
 Certificate() {
   echo
-  openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=California/L=Los Angeles/O=Example Corp/OU=IT Department/CN=zivpn" -keyout "$Dir/zivpn.key" -out "$Dir/zivpn.crt"
+  openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=US/ST=California/L=Los Angeles/O=Example Corp/OU=IT Department/CN=zivpn" -keyout "$Dir/zivpn.key" -out "$Dir/zivpn.crt"
   echo
 }
 
@@ -140,10 +137,10 @@ RoutingTables() {
 }
 
 DownloadAndChmod() {
-  wget "https://github.com/zahidbd2/udp-zivpn/releases/download/udp-zivpn_1.4.9/udp-zivpn-linux-$MACHINE" -O /usr/local/bin/zivpn 1> /dev/null 2> /dev/null
+  wget "https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/udp-zivpn-linux-amd64" -O /usr/local/bin/zivpn 1> /dev/null 2> /dev/null
   chmod +x /usr/local/bin/zivpn
   
-  wget "https://raw.githubusercontent.com/potatonc/zivpn-udp/refs/heads/main/zivpn.py" -O /usr/local/bin/mzivpn 1> /dev/null 2> /dev/null
+  wget "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/zum/zivpn.py" -O /usr/local/bin/mzivpn 1> /dev/null 2> /dev/null
   chmod +x /usr/local/bin/mzivpn
 }
 
@@ -290,7 +287,7 @@ Install() {
     RestoreConfig
     RestartZivpn
     echo
-    echo -e "➜ ZIVPN UDP Terpasang"
+    echo -e "➜ Terpasang"
     echo
   else
     MsgNotInstalled
@@ -384,15 +381,15 @@ main() {
   *)
     echo
     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo -e "  🚀 ZIVPN UDP - Command Line Tool"
+    echo -e "  🚀 Command Line Tool"
     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo
     echo -e "  📌 Usage:"
     echo -e "    $0 <command>"
     echo
     echo -e "  🧩 Available Commands:"
-    echo -e "    install     ➜ Memasang ZIVPN UDP"
-    echo -e "    uninstall   ➜ Menghapus ZIVPN UDP"
+    echo -e "    install     ➜ Memasang"
+    echo -e "    uninstall   ➜ Menghapus"
     echo -e "    backup      ➜ Backup konfigurasi ke:"
     echo -e "                 $FileBackup"
     echo -e "    restore     ➜ Restore konfigurasi dari:"

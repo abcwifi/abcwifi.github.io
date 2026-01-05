@@ -122,12 +122,7 @@ Certificate() {
   echo
 }
 
-PostKernel() {
-  AppendLine "$Sysctl" "net.core.rmem_max=16777216"
-  AppendLine "$Sysctl" "net.core.wmem_max=16777216"
-  sysctl -w net.core.rmem_max=16777216 1> /dev/null 2> /dev/null
-  sysctl -w net.core.wmem_max=16777216 1> /dev/null 2> /dev/null
-}
+
 
 RoutingTables() {
   if Utils rt; then

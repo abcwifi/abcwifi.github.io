@@ -1,5 +1,8 @@
 #!/bin/bash
-# Auto
+# Zivpn UDP Module installer
+# Creator Zahid Islam
+#
+# Script by Potato
 ##############################
 
 NIC=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1)
@@ -102,10 +105,14 @@ After=network.target
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/etc/zivpn
-ExecStart=/usr/local/bin/zivpn server -c /etc/zivpn/config.json
+WorkingDirectory=$Dir
+ExecStart=/usr/local/bin/zivpn server -c $Dir/config.json
 Restart=always
-RestartSec=2s
+RestartSec=3
+Environment=ZIVPN_LOG_LEVEL=info
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
+NoNewPrivileges=true
 
 [Install]
 WantedBy=multi-user.target
@@ -118,12 +125,7 @@ Certificate() {
   echo
 }
 
-PostKernel() {
-  AppendLine "$Sysctl" "net.core.rmem_max=99999999"
-  AppendLine "$Sysctl" "net.core.wmem_max=99999999"
-  sysctl -w net.core.rmem_max=99999999 1> /dev/null 2> /dev/null
-  sysctl -w net.core.wmem_max=99999999 1> /dev/null 2> /dev/null
-}
+PostKernel() {}
 
 RoutingTables() {
   if Utils rt; then
@@ -377,23 +379,7 @@ main() {
   *)
     echo
     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo -e "  🚀 Command Line Tool"
-    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo
-    echo -e "  📌 Usage:"
-    echo -e "    $0 <command>"
-    echo
-    echo -e "  🧩 Available Commands:"
-    echo -e "    install     ➜ Memasang"
-    echo -e "    uninstall   ➜ Menghapus"
-    echo -e "    backup      ➜ Backup konfigurasi ke:"
-    echo -e "                 $FileBackup"
-    echo -e "    restore     ➜ Restore konfigurasi dari:"
-    echo -e "                 $FileBackup"
-    echo -e "    add         ➜ Menambahkan akun"
-    echo -e "    del         ➜ Menghapus akun"
-    echo -e "    list        ➜ Menampilkan daftar akun"
-    echo
+    echo -e "Done"
     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo
   ;;

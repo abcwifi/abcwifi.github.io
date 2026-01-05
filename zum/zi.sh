@@ -103,14 +103,10 @@ Wants=network.target
 [Service]
 Type=simple
 User=root
-WorkingDirectory=$Dir
-ExecStart=/usr/local/bin/zivpn server -c $Dir/config.json
+WorkingDirectory=/etc/zivpn
+ExecStart=/usr/local/bin/zivpn server -c /etc/zivpn/config.json
 Restart=always
-RestartSec=3
-Environment=ZIVPN_LOG_LEVEL=info
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-NoNewPrivileges=true
+RestartSec=2s
 
 [Install]
 WantedBy=multi-user.target
@@ -283,11 +279,12 @@ Install() {
   systemctl -q start zivpn
   
   if [[ $(systemctl is-active zivpn) == 'active' ]]; then
+    PostKernel
     RoutingTables
     RestoreConfig
     RestartZivpn
     echo
-    echo -e "➜ Terpasang"
+    echo -e "➜ ZIVPN UDP Terpasang"
     echo
   else
     MsgNotInstalled

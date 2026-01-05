@@ -99,20 +99,25 @@ END
 
   cat > /etc/systemd/system/zivpn.service <<-END
 [Unit]
-Description=zivpn VPN Server
-After=network.target
+Description=UDP Custom by ePro Dev. Team and modify by sslablk
+Documentation=https://google.com
+After=network.target nss-lookup.target
 
 [Service]
 Type=simple
 User=root
-WorkingDirectory=$Dir
-ExecStart=/usr/local/bin/zivpn server -c $Dir/config.json
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+Restart=on-failure
+WorkingDirectory=/etc/zivpn
+ExecStart=/usr/local/bin/zivpn server -c /etc/zivpn/config.json
 Restart=always
 RestartSec=3
-Environment=ZIVPN_LOG_LEVEL=info
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW
-NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
+
 
 [Install]
 WantedBy=multi-user.target

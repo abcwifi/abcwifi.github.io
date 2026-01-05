@@ -96,9 +96,8 @@ END
 
   cat > /etc/systemd/system/zivpn.service <<-END
 [Unit]
-Description=x-ui Service
+Description=zivpn VPN Server
 After=network.target
-Wants=network.target
 
 [Service]
 Type=simple

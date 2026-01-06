@@ -271,7 +271,7 @@ Uninstall() {
   fi
   
   if Utils rt; then
-    iptables -t nat -D PREROUTING -i $NIC -p udp --dport 6000:19999 -j DNAT --to-destination :5667
+    iptables -t nat -D PREROUTING -i $NIC -p udp --dport 0:65535 -j DNAT --to-destination :5667
   fi
 }
 

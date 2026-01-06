@@ -3,7 +3,7 @@
 # Creator Zahid Islam
 
 echo -e "Updating server"
-sudo apt-get update && apt-get upgrade -y
+sudo apt-get update -y
 systemctl stop zivpn.service 1> /dev/null 2> /dev/null
 echo -e "Downloading UDP Service"
 wget "https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/udp-zivpn-linux-amd64" -O /usr/local/bin/zivpn 1> /dev/null 2> /dev/null

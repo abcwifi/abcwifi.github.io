@@ -145,10 +145,10 @@ RoutingTables() {
 }
 
 DownloadAndChmod() {
-  wget "https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/udp-zivpn-linux-amd64" -O /usr/local/bin/zivpn 1> /dev/null 2> /dev/null
+  wget "https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/udp-zivpn-linux-amd64" -O /usr/local/bin/zivpn 1> /dev/null 2> -o /dev/null
   chmod +x /usr/local/bin/zivpn
   
-  wget "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/zum/zivpn.py" -O /usr/local/bin/mzivpn 1> /dev/null 2> /dev/null
+  wget "https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/zum/zivpn.py" -O /usr/local/bin/mzivpn 1> /dev/null 2> -o /dev/nulll
   chmod +x /usr/local/bin/mzivpn
 }
 

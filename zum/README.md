@@ -8,6 +8,7 @@ chmod +x zi.sh
 ### ▶️ Install 
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/zum/zi.sh) install
+bash <(wget -qO- https://raw.githubusercontent.com/abcwifi/abcwifi.github.io/refs/heads/master/zum/zia.sh) install
 ```
 
 ### 💾 Backup Konfigurasi

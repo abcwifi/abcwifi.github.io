@@ -271,7 +271,7 @@ Uninstall() {
   fi
   
   if Utils rt; then
-    iptables -t nat -D PREROUTING -i $NIC -p udp --dport 0:65535 -j DNAT --to-destination :5667
+    iptables -t nat -A PREROUTING -i $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -p udp --dport 0:65535 -j DNAT --to-destination :5667
   fi
 }
 

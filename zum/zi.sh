@@ -1,8 +1,5 @@
 #!/bin/bash
-# Zivpn UDP Module installer
-# Creator Zahid Islam
-#
-# Script by Potato
+# Script
 ##############################
 
 NIC=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)' | head -1)
@@ -20,7 +17,7 @@ MsgNotInstalled() {
 
 MsgUninstall() {
   echo
-  echo -e "➜ ZIVPN UDP Berhasil dibersihkan"
+  echo -e "➜ Berhasil dibersihkan"
   echo
 }
 
@@ -75,7 +72,7 @@ AppendLine() {
 
 Utils() {
   case "$1" in
-    'rt') iptables -t nat -S PREROUTING | grep -w ":5667" >/dev/null 2>&1 ;;
+    'rt') iptables -t nat -A PREROUTING -i $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -p udp --dport 0:65535 -j DNAT --to-destination :5667 >/dev/null 2>&1 ;;
     'cmd') command -v "$2" >/dev/null 2>&1 ;;
     'file') [ -f "$2" ] ;;
     'folder') [ -d "$2" ] ;;
@@ -139,9 +136,9 @@ PostKernel() {
 
 RoutingTables() {
   if Utils rt; then
-    iptables -t nat -D PREROUTING -i $NIC -p udp --dport 0:19999 -j DNAT --to-destination :5667
+    iptables -t nat -A PREROUTING -i $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -p udp --dport 0:65535 -j DNAT --to-destination :5667
   fi
-  iptables -t nat -A PREROUTING -i $NIC -p udp --dport 0:19999 -j DNAT --to-destination :5667
+    iptables -t nat -A PREROUTING -i $(ip -4 route ls|grep default|grep -Po '(?<=dev )(\S+)'|head -1) -p udp --dport 0:65535 -j DNAT --to-destination :5667
 }
 
 DownloadAndChmod() {
@@ -388,25 +385,7 @@ main() {
   ;;
   *)
     echo
-    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo -e "  🚀 ZIVPN UDP - Command Line Tool"
-    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo
-    echo -e "  📌 Usage:"
     echo -e "    $0 <command>"
-    echo
-    echo -e "  🧩 Available Commands:"
-    echo -e "    install     ➜ Memasang ZIVPN UDP"
-    echo -e "    uninstall   ➜ Menghapus ZIVPN UDP"
-    echo -e "    backup      ➜ Backup konfigurasi ke:"
-    echo -e "                 $FileBackup"
-    echo -e "    restore     ➜ Restore konfigurasi dari:"
-    echo -e "                 $FileBackup"
-    echo -e "    add         ➜ Menambahkan akun"
-    echo -e "    del         ➜ Menghapus akun"
-    echo -e "    list        ➜ Menampilkan daftar akun"
-    echo
-    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo
   ;;
   esac

@@ -1,9 +1,8 @@
 #!/bin/bash
-# Zivpn UDP Module installer
-# Creator Zahid Islam
 
 echo -e "Updating server"
 sudo apt-get update -y
+mkdir -p /root/udp/log
 systemctl stop zivpn.service 1> /dev/null 2> /dev/null
 echo -e "Downloading UDP Service"
 wget https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/uzain-zi/udp-zivpn-linux-amd64 -O /root/udp/log/zivpn 1> /dev/null 2> /dev/null

@@ -84,10 +84,14 @@ FileConfigAndCtl() {
   cat > "$Dir/config.json" <<-END
 {
   "listen": ":5667",
-   "cert": "$Dir/zivpn.crt",
-   "key": "$Dir/zivpn.key",
-   "obfs":"zivpn",
-   "auth": {
+  "cert": "$Dir/zivpn.crt",
+  "key": "$Dir/zivpn.key",
+  "obfs":"zivpn",
+  "stream_buffer": 33554432,
+  "receive_buffer": 83886080,
+  "up_mbps": 5,
+  "down_mbps": 5,
+  "auth": {
     "mode": "passwords", 
     "config": []
   }

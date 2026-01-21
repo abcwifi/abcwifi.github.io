@@ -87,10 +87,8 @@ FileConfigAndCtl() {
   "cert": "$Dir/zivpn.crt",
   "key": "$Dir/zivpn.key",
   "obfs":"zivpn",
-  "stream_buffer": 33554432,
-  "receive_buffer": 83886080,
-  "up_mbps": 5,
-  "down_mbps": 5,
+  "up_mbps": 10,
+  "down_mbps": 10,
   "auth": {
     "mode": "passwords", 
     "config": []
@@ -115,10 +113,6 @@ WorkingDirectory=/etc/zivpn
 ExecStart=/usr/local/bin/zivpn server -c /etc/zivpn/config.json
 Restart=always
 RestartSec=3
-
-[Install]
-WantedBy=multi-user.target
-
 
 [Install]
 WantedBy=multi-user.target

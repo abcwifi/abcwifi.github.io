@@ -10,16 +10,6 @@ mkdir -p /root/udp
 # banner
 clear
 
-echo -e "          ░█▀▀▀█ ░█▀▀▀█ ░█─── ─█▀▀█ ░█▀▀█   ░█─░█ ░█▀▀▄ ░█▀▀█ " | lolcat
-echo -e "          ─▀▀▀▄▄ ─▀▀▀▄▄ ░█─── ░█▄▄█ ░█▀▀▄   ░█─░█ ░█─░█ ░█▄▄█ " | lolcat
-echo -e "          ░█▄▄▄█ ░█▄▄▄█ ░█▄▄█ ░█─░█ ░█▄▄█   ─▀▄▄▀ ░█▄▄▀ ░█─── " | lolcat
-echo ""
-echo ""
-echo ""
-sleep 5
-
-
-
 # install udp-custom
 echo downloading udp-custom
 wget "https://github.com/abcwifi/abcwifi.github.io/raw/refs/heads/master/UDP-Custom-Script-main/udp-custom-linux-amd64" -O /root/udp/udp-custom
@@ -33,17 +23,23 @@ if [ -z "$1" ]; then
 cat <<EOF > /etc/systemd/system/udp-custom.service
 [Unit]
 Description=UDP Custom by ePro Dev. Team and modify by sslablk
+Documentation=https://google.com
+After=network.target nss-lookup.target
 
 [Service]
-User=root
 Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+Restart=on-failure
 ExecStart=/root/udp/udp-custom server
 WorkingDirectory=/root/udp/
-Restart=always
-RestartSec=2s
+Restart=on-failure
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
+
 EOF
 else
 cat <<EOF > /etc/systemd/system/udp-custom.service

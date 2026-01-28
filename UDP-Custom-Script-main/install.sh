@@ -60,12 +60,7 @@ EOF
 fi
 
 clear
-echo '    Install Custom UDP Manager   ' | lolcat
 
-echo ''
-echo ''
-echo ''
-sleep 5
 cd $HOME
 mkdir /etc/Sslablk
 cd /etc/Sslablk
@@ -89,12 +84,7 @@ rm system.zip
 clear
 echo 'UDP Install Script By Project SSLAB LK Dev.Team'
 echo 'UDP Custom By ePro Dev. Team'
-echo ''
-echo ''
-echo ' Support US'
-echo "Github/noobconner21"
-echo "Telegram/SSLAB LK"
-sleep 5
+
 
 echo start service udp-custom
 systemctl start udp-custom &>/dev/null
